@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cn } from '../components.utils';
 
-type SectionProps = React.ComponentProps<'div'> & {
+type SectionProps = React.ComponentProps<'section'> & {
   asChild?: boolean;
 };
 

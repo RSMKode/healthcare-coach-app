@@ -2,21 +2,21 @@ import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cn } from '../components.utils';
 
-type CardGridProps = React.ComponentProps<'div'> & {
+type SectionProps = React.ComponentProps<'main'> & {
   asChild?: boolean;
 };
 
-export const CardGrid = ({
+export const Main = ({
   children,
   className,
   asChild = false,
   ...props
-}: CardGridProps) => {
-  const Comp = asChild ? Slot : 'section';
+}: SectionProps) => {
+  const Comp = asChild ? Slot : 'main';
   return (
     <Comp
       className={cn(
-        'grid w-full grid-cols-auto-fill-xs justify-center gap-4',
+        'flex flex-col w-full items-center gap-4',
         className
       )}
       {...props}>

@@ -13,22 +13,22 @@ export default function Header({ children, className }: HeaderProps) {
   const [isSticky, setIsSticky] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      console.log(window.scrollY);
-      if (window.scrollY > lastScrollY && window.scrollY > 0) {
-        setIsSticky(true);
-      } else {
-        setIsSticky(false);
-      }
-      setLastScrollY(window.scrollY);
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     console.log(window.scrollY);
+  //     if (window.scrollY > lastScrollY && window.scrollY > 0) {
+  //       setIsSticky(true);
+  //     } else {
+  //       setIsSticky(false);
+  //     }
+  //     setLastScrollY(window.scrollY);
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [lastScrollY]);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, [lastScrollY]);
 
   return (
     <header
@@ -39,11 +39,11 @@ export default function Header({ children, className }: HeaderProps) {
       )}
     >
       <div className="flex items-center gap-1 @md:gap-2">
-        <AppSidebarTrigger
+        {/* <AppSidebarTrigger
           variant="color_ghost"
           size="icon"
           className="backdrop-blur-none"
-        />
+        /> */}
         {/* <Separator
             orientation="vertical"
             className="h-full min-h-4 bg-accent-primary-foreground"
@@ -53,8 +53,7 @@ export default function Header({ children, className }: HeaderProps) {
             size="icon"
             className="text-accent-primary-foreground hover:bg-accent-primary-foreground hover:text-accent-primary backdrop-blur-none"
           /> */}
-        <AppBreadcrumb homeLink="/dashboard" />
-        {/* <AppBreadcrumb className="px-2 py-1 bg-background/50 rounded"/> */}
+        {/* <AppBreadcrumb homeLink="/dashboard" /> */}
         {children}
       </div>
       <div className="flex items-center gap-1 @md:gap-2">
