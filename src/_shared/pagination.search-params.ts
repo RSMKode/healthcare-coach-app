@@ -16,3 +16,7 @@ export const paginationSearchParams = (options?: SearchParamsOptionsT) => {
       .withOptions(newOptions),
   };
 };
+
+export const DEFAULT_PAGE_INDEX = 1;
+export const DEFAULT_PAGE_SIZE = 20;
+export const PAGINATION_OPTIONS = [0, 5, 10, 20, 50];

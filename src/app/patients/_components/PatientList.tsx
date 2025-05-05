@@ -2,27 +2,29 @@ import { paginationSearchParams } from '@/_shared/pagination.search-params';
 import { CardGrid } from '@/app/_components/layout/CardGrid';
 import { Section } from '@/app/_components/layout/Section';
 import { useQueryStates } from 'nuqs';
-import { useGetPatients } from '../_core/patients.use-cases';
 import { CardSkeleton } from '@/app/_components/skeletons/CardSkeleton';
 import { PatientCard } from './PatientCard';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
+import { usePatients } from '../_hooks/use-patients';
+import { PatientListPagination } from './PatientListPagination';
 
-export function PatientList() {
+type PatientListProps = React.ComponentProps<typeof Section>;
+export function PatientList({ ...props }: PatientListProps) {
   const [pagination] = useQueryStates(paginationSearchParams());
-
   const { page, pageSize } = pagination;
 
+  const { getMany: patientsGetMany } = usePatients();
   const {
     data: paginatedPatients,
     isLoading,
     isError,
     error,
-  } = useGetPatients({
+  } = patientsGetMany({
     page,
     pageSize,
   });
-  const { data: patients } = paginatedPatients || {};
+  const { data: patients, pageCount = 0} = paginatedPatients || {};
 
   const fakePatientCount = 10;
   const fakePatients = Array.from({ length: fakePatientCount });
@@ -36,7 +38,7 @@ export function PatientList() {
   console.log('patients', patients);
 
   return (
-    <Section>
+    <Section {...props}>
       <h2 className="text-2xl font-bold">Patients</h2>
       <CardGrid>
         {isLoading
@@ -45,6 +47,7 @@ export function PatientList() {
               <PatientCard patient={patient} key={patient.id} />
             ))}
       </CardGrid>
+      <PatientListPagination pageCount={pageCount}/>
     </Section>
   );
 }

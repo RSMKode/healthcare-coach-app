@@ -1,8 +1,9 @@
 "use server"
 
-import { NotFoundError } from '@/lib/error';
-import { getPaginatedResults } from '@/lib/pagination';
-import { prisma } from '@/lib/prisma';
+import { NotFoundError } from '@/lib/error.lib';
+import { delay } from '@/lib/helpers.lib';
+import { getPaginatedResults } from '@/lib/pagination.lib';
+import { prisma } from '@/lib/prisma.lib';
 import { normalizeString } from '@/lib/utils';
 
 export const getPatients = async (options: {
@@ -13,7 +14,7 @@ export const getPatients = async (options: {
   const { page = 1, pageSize = 20, query } = options;
   console.log({options})
 
-  // delay(1000);
+  delay(500);
 
   const patients = await prisma.patient.findMany({
     orderBy: [{ name: 'desc' }],
