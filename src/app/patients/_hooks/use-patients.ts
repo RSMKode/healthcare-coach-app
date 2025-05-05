@@ -16,7 +16,15 @@ export const usePatients = () => {
     const { page, pageSize, query } = options;
 
     const queryFn = useQuery({
-      queryKey: [CACHE_TAGS.patients, `page-${page}`, `pageSize-${pageSize}`, `query-${query}`],
+      queryKey: [
+        CACHE_TAGS.patients,
+        CACHE_TAGS.ALL,
+        {
+          page,
+          pageSize,
+          query,
+        },
+      ],
       queryFn: () => getPatientsUseCase(options),
     });
     return queryFn;
@@ -24,7 +32,7 @@ export const usePatients = () => {
 
   const getById = (patientId: string) => {
     const query = useQuery({
-      queryKey: [CACHE_TAGS.patients, patientId],
+      queryKey: [CACHE_TAGS.patients, CACHE_TAGS.ALL, { patientId }],
       queryFn: () => getPatientByIdUseCase({ patientId }),
     });
     return query;

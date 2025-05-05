@@ -24,9 +24,9 @@ export function PatientList({ ...props }: PatientListProps) {
     page,
     pageSize,
   });
-  const { data: patients, pageCount = 0} = paginatedPatients || {};
+  const { data: patients, pageCount = 0 } = paginatedPatients || {};
 
-  const fakePatientCount = 10;
+  const fakePatientCount = pageSize || 12;
   const fakePatients = Array.from({ length: fakePatientCount });
 
   useEffect(() => {
@@ -38,8 +38,7 @@ export function PatientList({ ...props }: PatientListProps) {
   console.log('patients', patients);
 
   return (
-    <Section {...props}>
-      <h2 className="text-2xl font-bold">Patients</h2>
+    <>
       <CardGrid>
         {isLoading
           ? fakePatients.map((_, index) => <CardSkeleton key={index} />)
@@ -47,7 +46,7 @@ export function PatientList({ ...props }: PatientListProps) {
               <PatientCard patient={patient} key={patient.id} />
             ))}
       </CardGrid>
-      <PatientListPagination pageCount={pageCount}/>
-    </Section>
+      <PatientListPagination pageCount={pageCount} />
+    </>
   );
 }
