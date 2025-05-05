@@ -7,8 +7,6 @@ import { CardSkeleton } from '@/app/_components/skeletons/CardSkeleton';
 import { PatientCard } from './PatientCard';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
-import { error } from 'console';
-import { prisma } from '@/lib/prisma';
 
 export function PatientList() {
   const [pagination] = useQueryStates(paginationSearchParams());
@@ -24,7 +22,7 @@ export function PatientList() {
     page,
     pageSize,
   });
-  const { pageData: patients } = paginatedPatients || {};
+  const { data: patients } = paginatedPatients || {};
 
   const fakePatientCount = 10;
   const fakePatients = Array.from({ length: fakePatientCount });

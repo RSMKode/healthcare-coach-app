@@ -1,7 +1,6 @@
 "use server"
 
 import { NotFoundError } from '@/lib/error';
-import { delay } from '@/lib/helpers';
 import { getPaginatedResults } from '@/lib/pagination';
 import { prisma } from '@/lib/prisma';
 import { normalizeString } from '@/lib/utils';
@@ -12,6 +11,7 @@ export const getPatients = async (options: {
   query?: string;
 }) => {
   const { page = 1, pageSize = 20, query } = options;
+  console.log({options})
 
   // delay(1000);
 
@@ -26,6 +26,7 @@ export const getPatients = async (options: {
         normalizeString(patient.name).includes(normalizeString(query));
       })
     : patients;
+    console.log({filteredPatients})
 
   const paginatedPatients = getPaginatedResults(filteredPatients, {
     page,
