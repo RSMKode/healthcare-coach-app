@@ -1,8 +1,10 @@
-"use client";
+'use client';
 
-import { cn } from "../components.utils";
-import ThemePicker from "../theme/ThemePicker";
-import { useState, useEffect } from "react";
+import { cn } from '../components.utils';
+import { AppSidebarTrigger } from '../sidebar/AppSidebarTrigger';
+import ThemePicker from '../theme/ThemePicker';
+import { useState, useEffect } from 'react';
+import { ClearCacheButton } from './ClearCacheButton';
 
 type HeaderProps = {
   children?: React.ReactNode;
@@ -10,53 +12,28 @@ type HeaderProps = {
 };
 
 export default function Header({ children, className }: HeaderProps) {
-  const [isSticky, setIsSticky] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     console.log(window.scrollY);
-  //     if (window.scrollY > lastScrollY && window.scrollY > 0) {
-  //       setIsSticky(true);
-  //     } else {
-  //       setIsSticky(false);
-  //     }
-  //     setLastScrollY(window.scrollY);
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, [lastScrollY]);
-
   return (
     <header
       className={cn(
-        "ease border-accent-primary bg-secondary dark:shadow-background/70 @container sticky top-0 z-20 flex w-full flex-wrap items-center justify-between gap-y-1 border-b-2 p-1.5 shadow-md transition duration-300 sm:p-2",
-        className,
-        isSticky && "-translate-y-60",
-      )}
-    >
+        'ease bg-secondary/50 backdrop-blur-md dark:shadow-background/70 @container sticky top-0 z-20 flex w-full flex-wrap items-center justify-between gap-y-1 border-b-2 p-1.5 shadow-md transition duration-300 sm:p-2',
+        className
+      )}>
       <div className="flex items-center gap-1 @md:gap-2">
-        {/* <AppSidebarTrigger
-          variant="color_ghost"
-          size="icon"
-          className="backdrop-blur-none"
-        /> */}
+        <AppSidebarTrigger size="icon" className="backdrop-blur-none" />
         {/* <Separator
             orientation="vertical"
-            className="h-full min-h-4 bg-accent-primary-foreground"
+            className="h-full min-h-4 bg-primary-foreground"
           />
           <BackButton
             variant="ghost"
             size="icon"
-            className="text-accent-primary-foreground hover:bg-accent-primary-foreground hover:text-accent-primary backdrop-blur-none"
+            className="text-primary-foreground hover:bg-primary-foreground hover:text-primary backdrop-blur-none"
           /> */}
         {/* <AppBreadcrumb homeLink="/dashboard" /> */}
         {children}
       </div>
       <div className="flex items-center gap-1 @md:gap-2">
+        <ClearCacheButton refreshGlobal={true} />
         <ThemePicker />
       </div>
     </header>

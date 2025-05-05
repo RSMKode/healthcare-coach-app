@@ -283,7 +283,7 @@
   * {
     @apply border-border outline-ring/50;
     scrollbar-width: thin;
-    /* scrollbar-color: var(--accent-primary) transparent; */
+    /* scrollbar-color: var(--primary) transparent; */
     scrollbar-color: var(--secondary) transparent;
     box-sizing: border-box;
   }

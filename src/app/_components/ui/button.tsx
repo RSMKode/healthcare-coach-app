@@ -20,8 +20,8 @@ const buttonVariants = cva(
         secondary:
           'bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80',
         ghost:
-          'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
-        link: 'text-primary underline-offset-4 hover:underline',
+          'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 border-none',
+        link: 'text-primary underline-offset-4 hover:underline border-none',
       },
       size: {
         sm: 'px-2 py-1 text-xs [&_svg]:size-4 [&_svg]:shrink-0',
@@ -83,9 +83,20 @@ const Button = ({
   asChild = false,
   ...props
 }: ButtonProps) => {
-  const Comp = asChild ? Slot : 'button';
-  const TempButton = (
-    <Comp
+
+  const TempButton = asChild ? (
+    <Slot
+      data-slot="button"
+      className={cn(
+        buttonVariants({ shadow, variant, size, border, rounded, className })
+      )}
+      data-pending={isPending}
+      {...props}>
+      {children}
+      {/* {isPending && <Spinner className={cn('size-4', spinnerClassName)} />} */}
+    </Slot>
+  ) : (
+    <button
       data-slot="button"
       className={cn(
         buttonVariants({ shadow, variant, size, border, rounded, className })
@@ -94,34 +105,8 @@ const Button = ({
       {...props}>
       {children}
       {isPending && <Spinner className={cn('size-4', spinnerClassName)} />}
-    </Comp>
+    </button>
   );
-
-  // const TempButton = asChild ? (
-  //   <Slot
-  //     data-slot="button"
-  //     className={cn(
-  //       buttonVariants({ shadow, variant, size, border, rounded, className }),
-  //     )}
-  //     data-pending={isPending}
-  //     {...props}
-  //   >
-  //     {children}
-  //     {isPending && <Spinner className={cn("size-4", spinnerClassName)} />}
-  //   </Slot>
-  // ) : (
-  //   <button
-  //     data-slot="button"
-  //     className={cn(
-  //       buttonVariants({ shadow, variant, size, border, rounded, className }),
-  //     )}
-  //     data-pending={isPending}
-  //     {...props}
-  //   >
-  //     {children}
-  //     {isPending && <Spinner className={cn("size-4", spinnerClassName)} />}
-  //   </button>
-  // );
 
   return tooltip ? (
     <Tooltip>

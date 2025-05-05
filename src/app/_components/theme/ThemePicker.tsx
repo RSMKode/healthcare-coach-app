@@ -50,7 +50,7 @@ const LightDarkPicker = ({ className, ...props }: LightDarkPickerProps) => {
   if (!isHydrated)
     return (
       <Button disabled className="p-1" variant={"default"}>
-        <VscColorMode className="size-4 sm:size-5" />
+        <VscColorMode className="size-4" />
       </Button>
     );
 
@@ -61,22 +61,21 @@ const LightDarkPicker = ({ className, ...props }: LightDarkPickerProps) => {
       <DropdownMenuTrigger asChild>
         <Button
           className={cn(
-            "px-1 hover:border-transparent hover:bg-foreground hover:text-accent-primary sm:px-2",
             className,
           )}
-          tooltip="Cambiar tema"
+          tooltip="Switch theme"
           variant={"default"}
           {...props}
         >
-          {Icon && <Icon className="size-4 sm:size-5" />}
+          {Icon && <Icon className="size-4" />}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="border-2 border-accent-primary bg-background/70 backdrop-blur-xs"
+        className="border-2 bg-background/70 backdrop-blur-xs"
         onCloseAutoFocus={(e) => e.preventDefault()}
       >
         <DropdownMenuLabel>Tema</DropdownMenuLabel>
-        <DropdownMenuSeparator className="bg-accent-primary" />
+        <DropdownMenuSeparator/>
         {THEMES.map((t) => {
           const { label, className, Icon } = t;
           return (
@@ -84,11 +83,11 @@ const LightDarkPicker = ({ className, ...props }: LightDarkPickerProps) => {
               key={label}
               className={cn(
                 "flex items-center gap-2",
-                theme === className && "bg-accent-primary/40",
+                theme === className && "bg-primary/40",
               )}
               onClick={() => setTheme(className)}
             >
-              <Icon className="size-4 sm:size-5" />
+              <Icon className="size-4" />
               <span>{label}</span>
             </DropdownMenuItem>
           );

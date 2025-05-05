@@ -9,7 +9,7 @@ export async function AppSidebarFooter() {
               src={sessionUser.avatar}
               alt={sessionUser.name}
             /> */}
-      <AvatarFallback className="font-semibol rounded-lg border-2 border-accent-primary bg-accent-primary/50 font-semibold text-foreground/80 transition hover:bg-accent-primary/80 hover:text-accent-primary-foreground">
+      <AvatarFallback className="font-semibol rounded-lg border-2 border-primary bg-primary/50 font-semibold text-foreground/80 transition hover:bg-primary/80 hover:text-primary-foreground">
         {sessionUser.token &&
           getInitialsFromName(sessionUser.name || sessionUser.username, 2)}
       </AvatarFallback>
@@ -33,7 +33,7 @@ export async function AppSidebarFooter() {
                     <span className="truncate font-semibold">
                       {sessionUser.name}
                     </span>
-                    <span className="truncate text-xs font-semibold text-accent-primary">
+                    <span className="truncate text-xs font-semibold text-primary">
                       {sessionUser.database}
                     </span>
                   </div>
@@ -41,7 +41,7 @@ export async function AppSidebarFooter() {
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="w-[--radix-dropdown-menu-trigger-widt min-w-56 max-w-full rounded-lg border-2 border-accent-primary bg-background/70 backdrop-blur"
+                className="w-[--radix-dropdown-menu-trigger-widt min-w-56 max-w-full rounded-lg border-2 border-primary bg-background/70 backdrop-blur"
                 side="bottom"
                 align="start"
                 sideOffset={4}
@@ -53,7 +53,7 @@ export async function AppSidebarFooter() {
                       <span className="truncate font-semibold">
                         {sessionUser.name}
                       </span>
-                      <span className="truncate text-xs font-semibold text-accent-primary">
+                      <span className="truncate text-xs font-semibold text-primary">
                         {sessionUser.database}
                       </span>
                       <div className="flex flex-col gap-x-2 text-foreground/80">

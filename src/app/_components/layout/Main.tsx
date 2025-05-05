@@ -16,7 +16,7 @@ export const Main = ({
   return (
     <Comp
       className={cn(
-        'flex flex-col w-full items-center gap-4',
+        'flex flex-col w-full h-full items-center gap-4',
         className
       )}
       {...props}>

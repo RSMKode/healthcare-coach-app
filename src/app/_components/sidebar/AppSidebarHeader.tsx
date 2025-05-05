@@ -4,6 +4,7 @@ import Link from "next/link";
 import { cn } from "../components.utils";
 import { useSidebar, SidebarHeader, SidebarMenu, SidebarMenuButton } from "../ui/sidebar";
 import { TbHospital } from "react-icons/tb";
+import { APP_NAME } from "@/config/main.config";
 
 
 export function AppSidebarHeader() {
@@ -14,19 +15,21 @@ export function AppSidebarHeader() {
     <SidebarHeader  className={cn("items-center", isCollapsed ? "flex-col" : "flex-row")}>
       <SidebarMenu>
         <SidebarMenuButton
+          variant={"default"}
           size={"lg"}
           tooltip={"Home"}
-          className="justify-center border-2 border-accent-primary bg-accent-primary/70 text-accent-primary-foreground hover:bg-accent-primary-foreground/90 hover:text-accent-primary hover:brightness-110 group-data-[collapsible=icon]:justify-normal group-data-[collapsible=icon]:!p-2"
+          className="justify-center border-2 border-primary text-primary-foreground bg-primary/90 hover:bg-primary/20 hover:text-primary"
           asChild
         >
           <Link href="/">
-            <TbHospital className="group-data-[collapsible=icon]:[&_svg]:size-5" />
+            <TbHospital className="group-data-[collapsible=expanded]:[&_svg]:!size-6"/>
+            {state === "expanded" && <span className="">{APP_NAME}</span>}
           </Link>
         </SidebarMenuButton>
       </SidebarMenu>
       {/* <AppSidebarTrigger /> */}
       {/* <Button
-        className="hover:bg-accent-primary flex w-auto items-start justify-center gap-2 border-transparent bg-accent-primary/70 px-1 py-2 text-accent-primary-foreground"
+        className="hover:bg-primary flex w-auto items-start justify-center gap-2 border-transparent bg-primary/70 px-1 py-2 text-primary-foreground"
         asChild
       >
         <Link href="/">

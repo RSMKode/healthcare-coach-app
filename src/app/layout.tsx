@@ -7,6 +7,7 @@ import { cn } from './_components/components.utils';
 import { APP_MAX_WIDTH } from '@/config/themes.config';
 import { MainLayout } from './_components/layout/MainLayout';
 import { APP_DESCRIPTION, APP_NAME } from '@/config/main.config';
+import { AppToaster } from './_components/layout/AppToaster';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,12 +30,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className='overflow-y-hidden'>
       <head />
-      <body suppressHydrationWarning className='flex justify-center'>
+      <body suppressHydrationWarning className='flex flex-col justify-center'>
         <Providers>
           <MainLayout>{children}</MainLayout>
         </Providers>
+        <AppToaster />
       </body>
     </html>
   );

@@ -66,7 +66,7 @@ export const ROUTES = {
       name: 'Patients',
       path: '/patients',
       icon: TbUsers,
-      type: 'page',
+      type: 'section',
     },
     patientId: {
       self: {

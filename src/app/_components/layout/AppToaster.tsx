@@ -1,6 +1,9 @@
+'use client';
+import { useTheme } from 'next-themes';
 import { Toaster } from 'sonner';
 
-export async function FlashToaster() {
+export function AppToaster() {
+  const { theme } = useTheme();
   return (
     <>
       <Toaster
@@ -13,7 +16,7 @@ export async function FlashToaster() {
             // toast: 'bg-muted text-foreground border-foreground/70',
           },
         }}
-        // theme="light"
+        // theme={theme === 'dark' ? 'dark' : 'light'}
       />
     </>
   );
