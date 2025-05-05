@@ -1,5 +1,5 @@
 export type PaginatedDataT<T> = {
-  pageData: T[];
+  data: T[];
   pageCount: number;
   pageStartIndex: number;
   pageEndIndex: number;
@@ -11,7 +11,7 @@ export const getPaginatedResults = <T>(
 ): PaginatedDataT<T> => {
   if (options.pageSize === 0) {
     return {
-      pageData: data,
+      data,
       pageCount: 1,
       pageStartIndex: 1,
       pageEndIndex: data.length,
@@ -27,7 +27,7 @@ export const getPaginatedResults = <T>(
   const pageStartIndex = (page - 1) * pageSize + 1;
   const pageEndIndex = Math.min(page * pageSize, length);
   return {
-    pageData,
+    data: pageData,
     pageCount,
     pageStartIndex,
     pageEndIndex,

@@ -12,7 +12,7 @@ export const paginationSearchParams = (options?: SearchParamsOptionsT) => {
       .withDefault(1)
       .withOptions(newOptions),
     [PARAMS.pagination.pageSize]: parseAsInteger
-      .withDefault(1)
+      .withDefault(20)
       .withOptions(newOptions),
   };
 };
