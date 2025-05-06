@@ -9,6 +9,7 @@ import { SidebarProvider } from '../ui/sidebar';
 import { AppSidebar } from '../sidebar/AppSidebar';
 import { getCookie } from 'cookies-next/client';
 import { SIDEBAR_STATE_KEY } from '@/config/main.config';
+import { useHydrated } from '@/hooks/useHydrated';
 
 type SectionProps = React.ComponentProps<'main'> & {
   asChild?: boolean;
@@ -20,7 +21,9 @@ export const MainLayout = ({
   asChild = false,
   ...props
 }: SectionProps) => {
-  const defaultOpen = getCookie(SIDEBAR_STATE_KEY) === 'true';
+
+  const hydrated = useHydrated();
+  const defaultOpen = hydrated ? getCookie(SIDEBAR_STATE_KEY) === 'true' : false
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>

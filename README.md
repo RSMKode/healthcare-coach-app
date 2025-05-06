@@ -35,5 +35,9 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-
-- Prop de busqueda de pacientes a backend asumiendo que la lista es grande
+- Mock de backend Server actions
+  -  Persistencia de datos con prisma sqlite
+- Suposiciones
+  - lista grande de pacientes
+    - Paginacion
+    - Prop de busqueda de pacientes a backend

@@ -15,7 +15,7 @@ export default function Header({ children, className }: HeaderProps) {
   return (
     <header
       className={cn(
-        'ease bg-secondary/50 backdrop-blur-md dark:shadow-background/70 @container sticky top-0 z-20 flex w-full flex-wrap items-center justify-between gap-y-1 border-b-2 p-1.5 shadow-md transition duration-300 sm:p-2',
+        'ease bg-secondary/50 backdrop-blur-md dark:shadow-background/70 @container sticky top-0 z-20 flex w-full flex-wrap items-center justify-between gap-y-1 border-b-2 p-1.5  transition duration-300 sm:p-2',
         className
       )}>
       <div className="flex items-center gap-1 @md:gap-2">

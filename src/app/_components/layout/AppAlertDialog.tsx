@@ -77,7 +77,7 @@ const AppAlertDialog = ({
           <div className="flex w-full flex-col-reverse flex-wrap-reverse items-center justify-between gap-2 sm:flex-row-reverse">
             <div className="flex w-fit flex-wrap items-center gap-2">
               <AlertDialogCancel asChild>
-                <Button className={cn('')} onClick={() => onCancelClick?.()}>
+                <Button variant="outline"className={cn('')} onClick={() => onCancelClick?.()}>
                   {cancelButtonChildren ?? (
                     <>
                       <span>Cancelar</span>

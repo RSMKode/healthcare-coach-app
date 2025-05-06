@@ -21,6 +21,9 @@ import { cn } from '@/app/_components/components.utils';
 import { ComponentProps, useState } from 'react';
 import { AppAlertDialog } from '@/app/_components/layout/AppAlertDialog';
 import { set } from 'zod';
+import { Dialog } from '@/app/_components/ui/dialog';
+import { DialogTrigger } from '@radix-ui/react-dialog';
+import { AppDialog } from '@/app/_components/layout/AppDialog';
 
 type PatientCardActionMenuProps = ComponentProps<typeof Button> & {
   patient: PatientT;
@@ -81,12 +84,15 @@ const PatientCardActionMenu = ({
             <span>{title}</span>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuGroup>
+          <DropdownMenuGroup className="flex flex-col gap-1">
             {userActions.map(action => {
               const { label, icon: Icon, destructive, onClick } = action;
               return (
                 <DropdownMenuItem
-                  onClick={onClick}
+                  onClick={e => {
+                    e.preventDefault();
+                    onClick?.();
+                  }}
                   key={label}
                   variant={destructive ? 'destructive' : 'default'}>
                   <span>{label}</span>
@@ -95,24 +101,31 @@ const PatientCardActionMenu = ({
               );
             })}
           </DropdownMenuGroup>
+          <AppDialog
+            open={patientAction === 'add'}
+            onInteractOutside={() => setPatientAction(null)}
+            title="Delete Patient"
+            description="Are you sure you want to delete this patient? This action cannot be undone."
+            
+          />
+          <AppAlertDialog
+            open={patientAction === 'delete'}
+            onActionClick={() => {
+              alert('Delete patient action clicked');
+              setPatientAction(null);
+            }}
+            onCancelClick={() => setPatientAction(null)}
+            title="Delete Patient"
+            description="Are you sure you want to delete this patient? This action cannot be undone."
+            actionButtonChildren={
+              <span className="flex items-center gap-2">
+                Delete Patient
+                <TbTrash className="size-5" />
+              </span>
+            }
+          />
         </DropdownMenuContent>
       </DropdownMenu>
-      <AppAlertDialog
-        open={patientAction === 'delete'}
-        onActionClick={() => {
-          alert('Delete patient action clicked');
-          setPatientAction(null);
-        }}
-        onCancelClick={() => setPatientAction(null)}
-        title="Delete Patient"
-        description="Are you sure you want to delete this patient? This action cannot be undone."
-        actionButtonChildren={
-          <span className="flex items-center gap-2">
-            Delete Patient
-            <TbTrash className="size-5" />
-          </span>
-        }
-      />
     </>
   );
 };
