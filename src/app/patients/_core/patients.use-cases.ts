@@ -4,7 +4,7 @@ import {
   getPatient,
   getPatients,
   editPatient,
-} from './patients.db';
+} from './patients.services';
 import { PatientAddT, PatientEditT } from './patients.definitions';
 
 //? Here the use cases for patients are defined. These use cases are functions that encapsulate business logic and are responsible for calling the data access layer, where persistence is handled.

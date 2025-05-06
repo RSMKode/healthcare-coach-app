@@ -28,8 +28,15 @@ export const getPatients = async (options: {
 
   // Text fields created by Prisma Client in SQLite databases do not support case-insensitive filtering.
   const filteredPatients = query
-    ? parsedPatients.filter(patient =>
-        normalizeString(patient.name).includes(normalizeString(query))
+    ? parsedPatients.filter(
+        patient =>
+          normalizeString(patient.name).includes(normalizeString(query)) ||
+          normalizeString(patient.age.toString()).includes(
+            normalizeString(query)
+          ) ||
+          (normalizeString(patient.primaryCondition ?? "").includes(
+            normalizeString(query)
+          ))
       )
     : parsedPatients;
   console.log({ filteredPatients });
@@ -64,11 +71,6 @@ export const getPatient = async (options: { patientId: string }) => {
 
 export const addPatient = async (data: PatientAddT) => {
   await delay(500);
-
-  // const existingPatient = await prisma.patient.findUnique({
-  //   where: { id: data.name },
-  // });
-  // if (existingPatient) throw new Error('Patient already exists');
 
   let patient;
   try {

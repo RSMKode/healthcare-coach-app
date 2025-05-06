@@ -60,14 +60,14 @@ export const useCoachingNotes = () => {
             },
           ],
         });
-        queryClient.invalidateQueries({
-          queryKey: [
-            CACHE_TAGS.patient,
-            {
-              patientId: data.patientId,
-            },
-          ],
-        });
+        // queryClient.invalidateQueries({
+        //   queryKey: [
+        //     CACHE_TAGS.patient,
+        //     {
+        //       patientId: data.patientId,
+        //     },
+        //   ],
+        // });
         message && toast.success(message);
         onSuccess?.();
       },

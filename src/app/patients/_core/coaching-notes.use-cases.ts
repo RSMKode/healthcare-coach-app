@@ -4,7 +4,7 @@ import {
   editCoachingNote,
   deleteCoachingNote,
   getCoachingNote,
-} from './coaching-notes.db';
+} from './coaching-notes.services';
 import {
   CoachingNoteAddT,
   CoachingNoteEditT,

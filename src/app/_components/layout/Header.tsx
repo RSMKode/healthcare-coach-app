@@ -5,6 +5,9 @@ import { AppSidebarTrigger } from '../sidebar/AppSidebarTrigger';
 import ThemePicker from '../theme/ThemePicker';
 import { useState, useEffect } from 'react';
 import { ClearCacheButton } from './ClearCacheButton';
+import { Separator } from '../ui/separator';
+import AppBreadcrumb from './AppBreadcrumb';
+import { BackButton } from './BackButton';
 
 type HeaderProps = {
   children?: React.ReactNode;
@@ -20,16 +23,16 @@ export default function Header({ children, className }: HeaderProps) {
       )}>
       <div className="flex items-center gap-1 @md:gap-2">
         <AppSidebarTrigger size="icon" className="backdrop-blur-none" />
-        {/* <Separator
-            orientation="vertical"
-            className="h-full min-h-4 bg-primary-foreground"
-          />
-          <BackButton
-            variant="ghost"
-            size="icon"
-            className="text-primary-foreground hover:bg-primary-foreground hover:text-primary backdrop-blur-none"
-          /> */}
-        {/* <AppBreadcrumb homeLink="/dashboard" /> */}
+        <Separator
+          orientation="vertical"
+          className="h-full min-h-4"
+        />
+        <BackButton
+          variant="ghost"
+          size="icon"
+          className=""
+        />
+        <AppBreadcrumb homeLink="/dashboard" />
         {children}
       </div>
       <div className="flex items-center gap-1 @md:gap-2">

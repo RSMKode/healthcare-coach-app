@@ -26,7 +26,7 @@ export default function PatientSearch() {
           const value = (e.target as HTMLInputElement).value;
           debouncedSetQuery(value);
         }}
-        placeholder="Search patients..."
+        placeholder="Search patients by name, primary condition or age..."
       />
       {isPending && <Spinner className="size-6" />}
       {/* {query && (

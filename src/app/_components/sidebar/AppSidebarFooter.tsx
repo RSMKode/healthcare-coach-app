@@ -1,17 +1,33 @@
+'use client';
 
+import { getUser } from '@/app/api/user.services';
+import { getInitialsFromName } from '@/lib/presenter.lib';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@radix-ui/react-dropdown-menu';
+import { ChevronsUpDown } from 'lucide-react';
+import { Avatar, AvatarFallback } from '../ui/avatar';
+import {
+  SidebarFooter,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from '../ui/sidebar';
+import { LogoutButton } from './LogoutButton';
 
-export async function AppSidebarFooter() {
-  const sessionUser = await getSessionUser();
+export function AppSidebarFooter() {
+  const user = getUser();
 
   const UserAvatar = (
-    <Avatar className="size-9 rounded-lg">
-      {/* <AvatarImage
-              src={sessionUser.avatar}
-              alt={sessionUser.name}
-            /> */}
-      <AvatarFallback className="font-semibol rounded-lg border-2 border-primary bg-primary/50 font-semibold text-foreground/80 transition hover:bg-primary/80 hover:text-primary-foreground">
-        {sessionUser.token &&
-          getInitialsFromName(sessionUser.name || sessionUser.username, 2)}
+    <Avatar className="size-8 rounded-lg">
+      <AvatarFallback className="font-semibol rounded-lg border-2 border-primary/50 bg-primary/50 font-semibold text-foreground/80 transition hover:bg-primary/80 hover:text-primary-foreground">
+        {user &&
+          getInitialsFromName(user.name || user.username, { maxLetters: 2 })}
       </AvatarFallback>
     </Avatar>
   );
@@ -19,50 +35,45 @@ export async function AppSidebarFooter() {
   return (
     <SidebarFooter>
       <SidebarMenu>
-        {sessionUser.token && (
+        {user && (
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton
-                  tooltip={"Perfil"}
-                  size={"lg"}
-                  className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-                >
+                  tooltip={'Perfil'}
+                  size={'lg'}
+                  className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
                   {UserAvatar}
                   <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold">
-                      {sessionUser.name}
-                    </span>
+                    <span className="truncate font-semibold">{user.name}</span>
                     <span className="truncate text-xs font-semibold text-primary">
-                      {sessionUser.database}
+                      {user.role}
                     </span>
                   </div>
                   <ChevronsUpDown className="ml-auto size-4" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="w-[--radix-dropdown-menu-trigger-widt min-w-56 max-w-full rounded-lg border-2 border-primary bg-background/70 backdrop-blur"
+                className="w-[--radix-dropdown-menu-trigger-width] min-w-56 max-w-full rounded-lg border bg-background/70 backdrop-blur p-2 py-1"
                 side="bottom"
                 align="start"
-                sideOffset={4}
-              >
+                sideOffset={4}>
                 <DropdownMenuLabel className="p-0 font-normal">
                   <div className="flex max-w-full items-center gap-2 overflow-clip truncate p-1 text-left text-sm">
                     {UserAvatar}
                     <div className="grid flex-1 text-left text-sm leading-tight">
                       <span className="truncate font-semibold">
-                        {sessionUser.name}
+                        {user.name}
                       </span>
                       <span className="truncate text-xs font-semibold text-primary">
-                        {sessionUser.database}
+                        {user.role}
                       </span>
                       <div className="flex flex-col gap-x-2 text-foreground/80">
                         <span className="truncate text-xs font-semibold ">
-                          Sucursal {sessionUser.branch?.value} -{" "}
-                          {sessionUser.branch?.label}
+                          Company {user.company}
                         </span>
                         <span className="truncate text-xs font-semibold">
-                          Pasillos {sessionUser.aisles?.join(", ")}
+                          Email {user.email}
                         </span>
                       </div>
                     </div>
@@ -81,20 +92,6 @@ export async function AppSidebarFooter() {
             </DropdownMenu>
           </SidebarMenuItem>
         )}
-      </SidebarMenu>
-      <SidebarMenu>
-        <SidebarMenuItem>
-          <SidebarMenuButton
-            tooltip={"Desarrollado por ExpertOne"}
-            className="justify-center border bg-secondary hover:bg-foreground hover:text-background"
-            size={"sm"}
-          >
-            {/* <Link href="/"> */}
-            <ExpertOneLogoTiny className="hidden !w-7 group-data-[collapsible=icon]:block" />
-            <ExpertOneLogo className="!w-24 group-data-[collapsible=icon]:hidden" />
-            {/* </Link> */}
-          </SidebarMenuButton>
-        </SidebarMenuItem>
       </SidebarMenu>
     </SidebarFooter>
   );

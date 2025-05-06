@@ -85,7 +85,7 @@ export const PatientListPagination = ({
           <Select
             value={`${pageSize}`}
             onValueChange={value => updatePageSize(+value)}>
-            <SelectTrigger className="h-fit w-fit gap-1 border-2 border-foreground/30 px-2 py-1 transition hover:border-primary">
+            <SelectTrigger className="h-fit w-fit gap-1 border-foreground/30 px-2 py-1 transition hover:border-primary/70">
               <SelectValue placeholder={pageSize} />
             </SelectTrigger>
             <SelectContent side="top">

@@ -13,7 +13,7 @@ function Card({ className, asChild, hover, ...props }: CardProps) {
     <Comp
       data-slot="card"
       className={cn(
-        'bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-4 shadow-sm',
+        'bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-4 shadow-sm hover:border-primary/50 transition-colors',
         hover && 'hover:shadow-md border-primary',
         className
       )}

@@ -13,3 +13,10 @@ export const getInitialsFromName = (
   const initials = names.map(n => n.charAt(0).toUpperCase()).join('').slice(0, maxLetters);
   return initials;
 };
+
+export const capitalizeFirstLetterFromEachWord = (str: string) => {
+  return str
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
