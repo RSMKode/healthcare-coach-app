@@ -1,18 +1,36 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Section } from '../_components/layout/Section';
-import { PatientList } from './_components/PatientList';
+import { PatientList } from './_ui/_components/PatientList';
+import PatientDeleteDialog from './_ui/_components/PatientDeleteDialog';
+import PatientAddButton from './_ui/_components/PatientAddButton';
+import PatientAddDialog from './_ui/_components/PatientAddDialog';
+import PatientEditDialog from './_ui/_components/PatientEditDialog';
+import PatientSearch from './_ui/_components/PatientSearch';
+import { usePatientsContext } from './context';
 
 export default function PatientsPage() {
+  const { setSelectedPatient, setSelectedPatientAction } = usePatientsContext();
+
+  useEffect(() => {
+    setSelectedPatient(null);
+    setSelectedPatientAction(null);
+  }, []);
+
   return (
     <>
-      <header className="flex items-center justify-between w-full px-4 py-2">
-        <h1 className="text-2xl font-bold">Patients</h1>
+      <header className="flex items-center justify-between w-full gap-2 py-2">
+        <h1 className="text-2xl font-bold leading-none">Patients</h1>
+        <PatientAddButton />
       </header>
-      <Section className='h-full justify-between'>
+      <Section className="h-full">
+        <PatientSearch />
         <PatientList />
       </Section>
+      <PatientAddDialog />
+      <PatientEditDialog />
+      <PatientDeleteDialog />
     </>
   );
 }

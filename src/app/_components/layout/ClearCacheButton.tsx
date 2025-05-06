@@ -40,18 +40,21 @@ export const ClearCacheButton = ({
 
   const queryClient = useQueryClient();
 
+  const tooltipMessage = 'Clean cache';
+  const message = 'Cache cleaned successfully';
+
   return (
     <Button
       {...props}
       variant={variant || 'default'}
-      tooltip={tooltip || 'Vacíar caché y recargar'}
+      tooltip={tooltip || tooltipMessage}
       onClick={event => {
         onClick?.(event);
         startTransition(() => {
           // Caché global
           if (refreshGlobal) {
-            queryClient.invalidateQueries({ queryKey: [CACHE_TAGS.ALL] });
-            toast.success('Caché global vaciada exitosamente');
+            queryClient.invalidateQueries({ type: 'all' });
+            toast.success(message);
           }
           if (refreshPage) router.refresh();
         });

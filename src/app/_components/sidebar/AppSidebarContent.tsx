@@ -1,6 +1,6 @@
 'use client';
 
-import { ROUTES, RoutesT } from '@/app/patients/[patientId]/routes.config';
+import { ROUTES, RoutesT } from '@/config/routes.config';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';

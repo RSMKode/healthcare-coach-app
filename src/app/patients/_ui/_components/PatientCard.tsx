@@ -7,11 +7,11 @@ import {
   CardTitle,
 } from '@/app/_components/ui/card';
 import React from 'react';
-import { PatientT } from '../_core/patients.definitions';
+import { PatientT } from '../../_core/patients.definitions';
 import { Avatar, AvatarFallback } from '@/app/_components/ui/avatar';
 import { getInitialsFromName } from '@/lib/presenter.lib';
 import { Button } from '@/app/_components/ui/button';
-import { ROUTES } from '../[patientId]/routes.config';
+import { ROUTES } from '../../../../config/routes.config';
 import { TbArrowLeftFromArc, TbLink } from 'react-icons/tb';
 import Link from 'next/link';
 import { PatientCardActionMenu } from './PatientCardActionMenu';

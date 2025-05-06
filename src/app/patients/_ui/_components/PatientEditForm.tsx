@@ -1,6 +1,7 @@
 'use client';
 
 import ErrorLabel from '@/app/_components/layout/ErrorLabel';
+import { Button } from '@/app/_components/ui/button';
 import {
   Form,
   FormControl,
@@ -13,23 +14,29 @@ import {
 import { Input } from '@/app/_components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 import { z } from 'zod';
-import { PatientAddSchema } from '../_core/patients.definitions';
+import { PatientAddSchema, PatientT } from '../../_core/patients.definitions';
+import { usePatientsContext } from '../../context';
 import { usePatients } from '../_hooks/use-patients';
+import { TbEdit } from 'react-icons/tb';
 
-export const PatientUpdateFormSchema = PatientAddSchema;
-export type PatientUpdateFormT = z.infer<typeof PatientUpdateFormSchema>;
+export const PatientAddFormSchema = PatientAddSchema;
+export type PatientAddFormT = z.infer<typeof PatientAddFormSchema>;
 
-type PatientUpdateFormProps = {
-  patient: PatientUpdateFormT;
+type PatientAddFormProps = {
+  patient: PatientT;
 };
-export default function PatientUpdateForm({ patient }: PatientUpdateFormProps) {
-  const { add: addPatient } = usePatients();
-  const { mutate, isError, error, isPending, data } = addPatient();
+export default function PatientAddForm({ patient }: PatientAddFormProps) {
+  const { setSelectedPatientAction } = usePatientsContext();
+  const { editPatient } = usePatients();
+  const { mutate, isError, error, isPending } = editPatient({
+    onSuccess: () => {
+      setSelectedPatientAction(null);
+    },
+  });
 
-  const form = useForm<PatientUpdateFormT>({
-    resolver: zodResolver(PatientUpdateFormSchema),
+  const form = useForm<PatientAddFormT>({
+    resolver: zodResolver(PatientAddFormSchema),
     defaultValues: {
       name: patient.name,
       age: patient.age,
@@ -37,14 +44,15 @@ export default function PatientUpdateForm({ patient }: PatientUpdateFormProps) {
     },
   });
 
-  function onSubmit(values: PatientUpdateFormT) {
-    mutate(values);
-    toast.dismiss();
+  function onSubmit(values: PatientAddFormT) {
+    mutate({ id: patient.id, ...values });
   }
   return (
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-full flex flex-col gap-4">
           <FormField
             control={form.control}
             name="name"
@@ -78,7 +86,7 @@ export default function PatientUpdateForm({ patient }: PatientUpdateFormProps) {
               <FormItem>
                 <FormLabel>Primary Condition</FormLabel>
                 <FormControl>
-                  <Input placeholder="18" {...field} />
+                  <Input placeholder="Diabetes" {...field} />
                 </FormControl>
                 <FormDescription>
                   The primary condition that the patient is being treated for.
@@ -87,6 +95,10 @@ export default function PatientUpdateForm({ patient }: PatientUpdateFormProps) {
               </FormItem>
             )}
           />
+          <Button type="submit" isPending={isPending} className="w-full">
+            <span>Submit</span>
+            <TbEdit className="size-4" />
+          </Button>
         </form>
       </Form>
       {isError && <ErrorLabel>{error?.message}</ErrorLabel>}

@@ -14,6 +14,7 @@ export const DEFAULT_SEARCH_PARAMS_OPTIONS = {
 };
 
 export const PARAMS = {
+  query: 'query',
   pagination: {
     self: 'pagination',
     page: 'page',

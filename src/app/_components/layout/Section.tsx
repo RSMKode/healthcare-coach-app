@@ -16,7 +16,7 @@ export const Section = ({
   return (
     <Comp
       className={cn(
-        'flex flex-col w-full items-center gap-4 p-2',
+        'flex flex-col w-full items-center gap-4 py-2',
         className
       )}
       {...props}>

@@ -6,12 +6,9 @@ import { getPaginatedResults } from '@/lib/pagination.lib';
 import { prisma } from '@/lib/prisma.lib';
 import { normalizeString } from '@/lib/utils';
 import {
-  coachingNoteAdapter,
-  CoachingNoteAddT,
-  CoachingNoteUpdateT,
   patientAdapter,
   PatientAddT,
-  PatientUpdateT,
+  PatientEditT,
 } from './patients.definitions';
 
 export const getPatients = async (options: {
@@ -19,24 +16,26 @@ export const getPatients = async (options: {
   pageSize?: number;
   query?: string;
 }) => {
+  await delay(500);
   const { page = 1, pageSize = 20, query } = options;
-  console.log({ options });
-
-  delay(500);
 
   const patients = await prisma.patient.findMany({
     orderBy: [{ name: 'desc' }],
   });
   if (!patients.length) throw new NotFoundError('No patients found');
 
-  const parsedPatients = patients.map(patientAdapter);
+  const parsedPatients = patients.map(patientAdapter) ?? [];
 
   // Text fields created by Prisma Client in SQLite databases do not support case-insensitive filtering.
   const filteredPatients = query
-    ? parsedPatients.filter(patient => {
-        normalizeString(patient.name).includes(normalizeString(query));
-      })
+    ? parsedPatients.filter(patient =>
+        normalizeString(patient.name).includes(normalizeString(query))
+      )
     : parsedPatients;
+  console.log({ filteredPatients });
+  if (!filteredPatients.length) {
+    throw new NotFoundError('No patients found with this query');
+  }
   console.log({ filteredPatients });
 
   const paginatedPatients = getPaginatedResults(filteredPatients, {
@@ -48,6 +47,8 @@ export const getPatients = async (options: {
 };
 
 export const getPatient = async (options: { patientId: string }) => {
+  await delay(500);
+
   const { patientId } = options;
   const patient = await prisma.patient.findUnique({
     where: { id: patientId },
@@ -62,6 +63,8 @@ export const getPatient = async (options: { patientId: string }) => {
 };
 
 export const addPatient = async (data: PatientAddT) => {
+  await delay(500);
+
   // const existingPatient = await prisma.patient.findUnique({
   //   where: { id: data.name },
   // });
@@ -80,7 +83,9 @@ export const addPatient = async (data: PatientAddT) => {
 
   return { message, data: parsedPatient };
 };
-export const updatePatient = async (data: PatientUpdateT) => {
+export const editPatient = async (data: PatientEditT) => {
+  await delay(500);
+
   let patient;
   try {
     patient = await prisma.patient.update({
@@ -99,9 +104,15 @@ export const updatePatient = async (data: PatientUpdateT) => {
 };
 
 export const deletePatient = async (data: { patientId: string }) => {
+  await delay(500);
+
   const { patientId } = data;
   let patient;
   try {
+    await prisma.coachingNote.deleteMany({
+      where: { patientId },
+    });
+    // await prisma.coachingNote.deleteMany({
     patient = await prisma.patient.delete({
       where: { id: patientId },
     });
@@ -114,4 +125,4 @@ export const deletePatient = async (data: { patientId: string }) => {
   const parsedPatient = patientAdapter(patient);
 
   return { message, data: parsedPatient };
-}
+};

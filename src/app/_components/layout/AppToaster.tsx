@@ -10,7 +10,7 @@ export function AppToaster() {
         richColors
         closeButton
         duration={4000}
-        position="bottom-left"
+        position="bottom-center"
         toastOptions={{
           classNames: {
             // toast: 'bg-muted text-foreground border-foreground/70',

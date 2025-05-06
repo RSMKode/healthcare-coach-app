@@ -1,8 +1,7 @@
 'use client';
 
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import ErrorLabel from '@/app/_components/layout/ErrorLabel';
+import { Button } from '@/app/_components/ui/button';
 import {
   Form,
   FormControl,
@@ -12,39 +11,46 @@ import {
   FormLabel,
   FormMessage,
 } from '@/app/_components/ui/form';
-import { toast } from 'sonner';
-import { PatientAddSchema, PatientSchema } from '../_core/patients.definitions';
 import { Input } from '@/app/_components/ui/input';
-import { error } from 'console';
-import { isError } from 'util';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { TbPlaylistAdd } from 'react-icons/tb';
+import { z } from 'zod';
+import { PatientAddSchema } from '../../_core/patients.definitions';
+import { usePatientsContext } from '../../context';
 import { usePatients } from '../_hooks/use-patients';
-import ErrorLabel from '@/app/_components/layout/ErrorLabel';
 
 export const PatientAddFormSchema = PatientAddSchema;
 export type PatientAddFormT = z.infer<typeof PatientAddFormSchema>;
 
 type PatientAddFormProps = {};
 export default function PatientAddForm({}: PatientAddFormProps) {
-  const { add: addPatient } = usePatients();
-  const { mutate, isError, error, isPending, data } = addPatient();
+  const { setSelectedPatientAction } = usePatientsContext();
+  const { addPatient } = usePatients();
+  const { mutate, isError, error, isPending } = addPatient({
+    onSuccess: () => {
+      setSelectedPatientAction(null);
+    },
+  });
 
   const form = useForm<PatientAddFormT>({
     resolver: zodResolver(PatientAddFormSchema),
     defaultValues: {
       name: '',
-      age: undefined,
+      age: '' as unknown as number,
       primaryCondition: '',
     },
   });
 
   function onSubmit(values: PatientAddFormT) {
     mutate(values);
-    toast.dismiss();
   }
   return (
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-full flex flex-col gap-4">
           <FormField
             control={form.control}
             name="name"
@@ -78,7 +84,7 @@ export default function PatientAddForm({}: PatientAddFormProps) {
               <FormItem>
                 <FormLabel>Primary Condition</FormLabel>
                 <FormControl>
-                  <Input placeholder="18" {...field} />
+                  <Input placeholder="Diabetes" {...field} />
                 </FormControl>
                 <FormDescription>
                   The primary condition that the patient is being treated for.
@@ -87,6 +93,10 @@ export default function PatientAddForm({}: PatientAddFormProps) {
               </FormItem>
             )}
           />
+          <Button type="submit" isPending={isPending} className="w-full">
+            <span>Submit</span>
+            <TbPlaylistAdd className="size-4" />
+          </Button>
         </form>
       </Form>
       {isError && <ErrorLabel>{error?.message}</ErrorLabel>}

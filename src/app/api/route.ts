@@ -3,7 +3,7 @@ export async function GET(request: Request) {
 
     const { page = 1, pageSize = 20, query } = options;
     
-      // delay(1000);
+      // await delay(1000);
     
       const patients = await prisma.patient.findMany({
         orderBy: [{ name: 'desc' }],

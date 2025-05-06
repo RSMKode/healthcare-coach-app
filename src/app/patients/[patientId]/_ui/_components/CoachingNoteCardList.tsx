@@ -1,0 +1,73 @@
+import { CardGrid } from '@/app/_components/layout/CardGrid';
+import { Avatar, AvatarFallback } from '@/app/_components/ui/avatar';
+import { Button } from '@/app/_components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/app/_components/ui/card';
+import { CoachingNoteT } from '@/app/patients/_core/coaching-notes.definitions';
+import { PatientT } from '@/app/patients/_core/patients.definitions';
+import { ROUTES } from '@/config/routes.config';
+import { getInitialsFromName } from '@/lib/presenter.lib';
+import { Link } from 'lucide-react';
+import { TbArrowLeftFromArc } from 'react-icons/tb';
+import { CoachingNoteCard } from './CoachingNoteCard';
+import InfoLabel from '@/app/_components/layout/InfoLabel';
+import { Section } from '@/app/_components/layout/Section';
+import CoachingNoteAddButton from './CoachingNoteAddButton';
+import { useCoachingNotes } from '@/app/patients/_ui/_hooks/use-coaching-notes';
+import { CardSkeleton } from '@/app/_components/skeletons/CardSkeleton';
+
+type CoachingNoteCardListProps = React.ComponentProps<'div'> & {
+  patient: PatientT;
+};
+export function CoachingNoteCardList({
+  className,
+  patient,
+  ...props
+}: CoachingNoteCardListProps) {
+  const { getCoachingNotes } = useCoachingNotes();
+
+  const { data, isLoading, isRefetching, isError, error } = getCoachingNotes({
+    patientId: patient.id,
+  });
+  const { data: coachingNotes = [] } = data || {};
+
+  const isCurrentlyLoading = isLoading || isRefetching;
+  const fakeCoachingNoteCount = 6;
+  const fakeCoachingNotes = Array.from({ length: fakeCoachingNoteCount });
+
+  return (
+    <Section>
+      <header className="flex items-center justify-between w-full gap-2 py-2">
+        <h2 className="text-xl font-bold leading-none">Coaching Notes</h2>
+        <CoachingNoteAddButton />
+      </header>
+      {!coachingNotes.length && !isCurrentlyLoading && (
+        <InfoLabel className="w-full">No coaching notes found</InfoLabel>
+      )}
+      {isCurrentlyLoading && (
+        <CardGrid className="grid-cols-auto-fill">
+          {fakeCoachingNotes.map((_, index) => (
+            <CardSkeleton key={index} headerSections={0} />
+          ))}
+        </CardGrid>
+      )}
+      {!isCurrentlyLoading && coachingNotes.length > 0 && (
+        <CardGrid className="grid-cols-auto-fill">
+          {coachingNotes.map(coachingNote => (
+            <CoachingNoteCard
+              key={coachingNote.id}
+              coachingNote={coachingNote}
+              className="w-full"
+            />
+          ))}
+        </CardGrid>
+      )}
+    </Section>
+  );
+}

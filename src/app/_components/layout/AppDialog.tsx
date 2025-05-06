@@ -42,7 +42,7 @@ const AppDialog = ({
 }: AppDialogProps) => {
 
   return (
-    <Dialog open={open} {...props}>
+    <Dialog open={open} {...props} onOpenChange={onInteractOutside}>
       {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
       <DialogContent
         className="max-w-[90dvw] sm:max-w-lg"

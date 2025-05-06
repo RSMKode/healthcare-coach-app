@@ -158,7 +158,6 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.645 0.246 16.439);
-
 }
 
 :root {
@@ -194,6 +193,18 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+
+  --notice: hsl(217 91% 60%);
+  --notice-foreground: hsl(210 40% 98%);
+
+  --success: hsl(142 81% 40%);
+  --success-foreground: hsl(210 40% 98%);
+
+  --warning: hsl(45 90% 45%);
+  --warning-foreground: hsl(210 40% 98%);
+
+  --danger: hsl(347 77% 50%);
+  --danger-foreground: hsl(210 40% 98%);
 }
 
 .dark {
@@ -228,6 +239,18 @@
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+
+  --notice: hsl(217 91% 60%);
+  --notice-foreground: hsl(210 40% 98%);
+
+  --success: hsl(142 71% 45%);
+  --success-foreground: hsl(210 40% 98%);
+
+  --warning: hsl(45 93% 47%);
+  --warning-foreground: hsl(210 40% 98%);
+
+  --danger: hsl(347 77% 50%);
+  --danger-foreground: hsl(210 40% 98%);
 }
 
 @keyframes shimmer {

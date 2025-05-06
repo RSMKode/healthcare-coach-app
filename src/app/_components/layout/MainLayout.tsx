@@ -21,16 +21,17 @@ export const MainLayout = ({
   asChild = false,
   ...props
 }: SectionProps) => {
-
   const hydrated = useHydrated();
-  const defaultOpen = hydrated ? getCookie(SIDEBAR_STATE_KEY) === 'true' : false
+  const defaultOpen = hydrated
+    ? getCookie(SIDEBAR_STATE_KEY) === 'true'
+    : false;
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar />
-      <div className="flex h-screen w-full flex-col items-center overflow-x-auto">
+      <div className="flex h-screen w-full flex-col items-center overflow-y-auto overflow-x-hidden">
         <Header />
-        <Main className={cn(APP_MAX_WIDTH, className)} {...props}>
+        <Main className={cn('px-2', APP_MAX_WIDTH, className)} {...props}>
           {children}
         </Main>
       </div>

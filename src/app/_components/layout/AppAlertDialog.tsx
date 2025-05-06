@@ -29,6 +29,7 @@ type AppAlertDialogProps = React.ComponentProps<typeof AlertDialog> & {
   footer?: React.ReactNode;
   onActionClick?: () => void;
   onCancelClick?: () => void;
+  isActionPending?: boolean;
   isActionDestructive?: boolean;
   actionButtonChildren?: React.ReactNode;
   cancelButtonChildren?: React.ReactNode;
@@ -47,6 +48,7 @@ const AppAlertDialog = ({
   footer,
   onActionClick,
   onCancelClick,
+  isActionPending,
   isActionDestructive = false,
   actionButtonChildren,
   cancelButtonChildren,
@@ -77,7 +79,10 @@ const AppAlertDialog = ({
           <div className="flex w-full flex-col-reverse flex-wrap-reverse items-center justify-between gap-2 sm:flex-row-reverse">
             <div className="flex w-fit flex-wrap items-center gap-2">
               <AlertDialogCancel asChild>
-                <Button variant="outline"className={cn('')} onClick={() => onCancelClick?.()}>
+                <Button
+                  variant="outline"
+                  className={cn('')}
+                  onClick={() => onCancelClick?.()}>
                   {cancelButtonChildren ?? (
                     <>
                       <span>Cancelar</span>
@@ -88,8 +93,9 @@ const AppAlertDialog = ({
               </AlertDialogCancel>
               <AlertDialogAction asChild>
                 <Button
+                  isPending={isActionPending}
                   variant={isActionDestructive ? 'destructive' : 'default'}
-                  className={cn('')}
+                  className={cn('', isActionDestructive && 'text-foreground')}
                   border={2}
                   onClick={() => onActionClick?.()}>
                   {actionButtonChildren ?? (

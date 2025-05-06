@@ -1,5 +1,6 @@
 export const CACHE_TAGS = {
-    ALL: "*",
     patients: "patients",
     patient: "patient",
+    coachingNotes: "coaching-notes",
+    coachingNote: "coaching-note",
 } as const;
