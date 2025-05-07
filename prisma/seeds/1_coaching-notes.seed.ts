@@ -1,10 +1,8 @@
-import { PatientT } from '@/app/patients/_core/patients/patients.definitions';
 import type { PrismaClient } from '@prisma/client';
-import { Patient } from '../../generated/client';
 
 export const seedCoachingNotes = async (
   prisma: PrismaClient,
-  patients: Record<string, Patient>
+  patients: Record<string, any>
 ) => {
   const start = Date.now();
   console.log('Seeding coaching notes...');
