@@ -1,14 +1,12 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import { useRouter } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 import { TbRefresh } from 'react-icons/tb';
 import { toast } from 'sonner';
 import { cn } from '../components.utils';
 import { Button } from '../ui/button';
-import { useQueryClient } from '@tanstack/react-query';
-import { CACHE_TAGS } from '@/config/cache-tags.config';
 
 export type ClearCacheButtonProps = React.ComponentProps<typeof Button> & {
   refreshPage?: boolean;
@@ -53,7 +51,8 @@ export const ClearCacheButton = ({
         startTransition(() => {
           // Caché global
           if (refreshGlobal) {
-            queryClient.invalidateQueries({ type: 'all' });
+            // queryClient.invalidateQueries({ type: 'all' });
+            queryClient.resetQueries({ type: 'all' });
             toast.success(message);
           }
           if (refreshPage) router.refresh();

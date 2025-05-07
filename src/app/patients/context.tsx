@@ -2,8 +2,8 @@
 
 import { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { createContext } from 'react';
-import { CoachingNoteT, CoachingNoteActionT } from './_core/coaching-notes.definitions';
-import { PatientT, PatientActionT } from './_core/patients.definitions';
+import { CoachingNoteT, CoachingNoteActionT } from './_core/coaching-notes/coaching-notes.definitions';
+import { PatientT, PatientActionT } from './_core/patients/patients.definitions';
 
 type PatientsContextT = {
   selectedPatient: PatientT | null;

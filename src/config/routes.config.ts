@@ -1,9 +1,10 @@
+import { IconType } from 'react-icons';
 import { TbHome, TbUser, TbUsers } from 'react-icons/tb';
 
 export type RouteSelfT = {
   path: string;
   name: string;
-  icon?: any;
+  icon?: IconType;
   type: string;
 };
 

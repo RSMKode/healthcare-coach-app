@@ -9,7 +9,7 @@ import {
   getPatientUseCase,
   getPatientsUseCase,
   editPatientUseCase,
-} from '../../_core/patients.use-cases';
+} from '../../_core/patients/patients.use-cases';
 
 type MutationOptionsT = {
   onSuccess?: () => void;
@@ -17,121 +17,109 @@ type MutationOptionsT = {
   onSettled?: () => void;
   onMutate?: () => void;
 };
-export const usePatients = () => {
+
+export const useGetPatients = (options: { page?: number; pageSize?: number; query?: string }) => {
+  const { page, pageSize, query } = options;
+
+  return useQuery({
+    queryKey: [
+      CACHE_TAGS.patients,
+      {
+        page,
+        pageSize,
+        query,
+      },
+    ],
+    queryFn: () => getPatientsUseCase(options),
+    retry: 1,
+    retryDelay: 100,
+  });
+};
+
+export const useGetPatient = (options: { patientId: string }) => {
+  const { patientId } = options;
+
+  return useQuery({
+    queryKey: [CACHE_TAGS.patient, { patientId }],
+    queryFn: () => getPatientUseCase({ patientId }),
+  });
+};
+
+export const useAddPatient = (options?: MutationOptionsT) => {
   const queryClient = useQueryClient();
+  const { onSuccess, onError } = options || {};
 
-  const getPatients = (options: {
-    page?: number;
-    pageSize?: number;
-    query?: string;
-  }) => {
-    const { page, pageSize, query } = options;
+  return useMutation({
+    mutationFn: addPatientUseCase,
+    onSuccess: ({ data, message }) => {
+      queryClient.invalidateQueries({
+        queryKey: [CACHE_TAGS.patients],
+      });
+      message && toast.success(message);
+      onSuccess?.();
+    },
+    onError: err => {
+      const error = err as Error;
+      toast.error(error.message);
+      onError?.();
+    },
+  });
+};
 
-    const queryFn = useQuery({
-      queryKey: [
-        CACHE_TAGS.patients,
-        {
-          page,
-          pageSize,
-          query,
-        },
-      ],
-      queryFn: () => getPatientsUseCase(options),
-      retry: 1,
-      retryDelay: 100,
-    });
-    return queryFn;
-  };
+export const useEditPatient = (options?: MutationOptionsT) => {
+  const queryClient = useQueryClient();
+  const { onSuccess, onError } = options || {};
 
-  const getPatient = (options: { patientId: string }) => {
-    const { patientId } = options;
-    const query = useQuery({
-      queryKey: [CACHE_TAGS.patient, { patientId }],
-      queryFn: () => getPatientUseCase({ patientId }),
-    });
-    return query;
-  };
+  return useMutation({
+    mutationFn: editPatientUseCase,
+    onSuccess: ({ data, message }) => {
+      queryClient.invalidateQueries({
+        queryKey: [CACHE_TAGS.patients],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [
+          CACHE_TAGS.patient,
+          {
+            patientId: data?.id,
+          },
+        ],
+      });
+      message && toast.success(message);
+      onSuccess?.();
+    },
+    onError: err => {
+      const error = err as Error;
+      toast.error(error.message);
+      onError?.();
+    },
+  });
+};
 
-  const addPatient = (options?: MutationOptionsT) => {
-    const { onSuccess, onError } = options || {};
-    const mutation = useMutation({
-      mutationFn: addPatientUseCase,
-      onSuccess: ({ data, message }) => {
-        queryClient.invalidateQueries({
-          queryKey: [CACHE_TAGS.patients],
-        });
-        message && toast.success(message);
-        onSuccess?.();
-      },
-      onError: err => {
-        const error = err as Error;
-        toast.error(error.message);
-        onError?.();
-      },
-    });
-    return mutation;
-  };
+export const useDeletePatient = (options?: MutationOptionsT) => {
+  const queryClient = useQueryClient();
+  const { onSuccess, onError } = options || {};
 
-  const editPatient = (options?: MutationOptionsT) => {
-    const { onSuccess, onError } = options || {};
-    const mutation = useMutation({
-      mutationFn: editPatientUseCase,
-      onSuccess: ({ data, message }) => {
-        queryClient.invalidateQueries({
-          queryKey: [CACHE_TAGS.patients],
-        });
-        queryClient.invalidateQueries({
-          queryKey: [
-            CACHE_TAGS.patient,
-            {
-              patientId: data.id,
-            },
-          ],
-        });
-        message && toast.success(message);
-        onSuccess?.();
-      },
-      onError: err => {
-        const error = err as Error;
-        toast.error(error.message);
-        onError?.();
-      },
-    });
-    return mutation;
-  };
-  const deletePatient = (options?: MutationOptionsT) => {
-    const { onSuccess, onError } = options || {};
-    const mutation = useMutation({
-      mutationFn: deletePatientUseCase,
-      onSuccess: ({ data, message }) => {
-        queryClient.invalidateQueries({
-          queryKey: [CACHE_TAGS.patients],
-        });
-        queryClient.invalidateQueries({
-          queryKey: [
-            CACHE_TAGS.patient,
-            {
-              patientId: data.id,
-            },
-          ],
-        });
-        message && toast.success(message);
-        onSuccess?.();
-      },
-      onError: err => {
-        const error = err as Error;
-        toast.error(error.message);
-        onError?.();
-      },
-    });
-    return mutation;
-  };
-
-  return {
-    getPatients,
-    getPatient,
-    addPatient,
-    editPatient,
-    deletePatient,
-  };
+  return useMutation({
+    mutationFn: deletePatientUseCase,
+    onSuccess: ({ data, message }) => {
+      queryClient.invalidateQueries({
+        queryKey: [CACHE_TAGS.patients],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [
+          CACHE_TAGS.patient,
+          {
+            patientId: data?.id,
+          },
+        ],
+      });
+      message && toast.success(message);
+      onSuccess?.();
+    },
+    onError: err => {
+      const error = err as Error;
+      toast.error(error.message);
+      onError?.();
+    },
+  });
 };

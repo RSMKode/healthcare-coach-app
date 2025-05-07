@@ -1,28 +1,29 @@
 'use client';
 
-import { PatientDetails } from './_ui/_components/PatientDetails';
-import { useParams } from 'next/navigation';
-import { usePatients } from '../_ui/_hooks/use-patients';
 import InfoLabel from '@/app/_components/layout/InfoLabel';
 import { Section } from '@/app/_components/layout/Section';
 import { CardSkeleton } from '@/app/_components/skeletons/CardSkeleton';
-import { CoachingNoteCardList } from './_ui/_components/CoachingNoteCardList';
-import { useEffect, useState } from 'react';
+import { notFound, useParams } from 'next/navigation';
+import { useEffect } from 'react';
 import { usePatientsContext } from '../context';
 import CoachingNoteAddDialog from './_ui/_components/CoachingNoteAddDialog';
+import { CoachingNoteCardList } from './_ui/_components/CoachingNoteCardList';
 import CoachingNoteDeleteDialog from './_ui/_components/CoachingNoteDeleteDialog';
 import CoachingNoteEditDialog from './_ui/_components/CoachingNoteEditDialog';
+import { PatientDetails } from './_ui/_components/PatientDetails';
+import { useGetPatient } from '../_ui/_hooks/use-patients';
 
 export default function PatientPage() {
   const { patientId } = useParams<{ patientId: string }>();
-  const { getPatient } = usePatients();
+  // if (!patientId) return notFound();
+
   const {
     setSelectedPatient,
     setSelectedCoachingNote,
     setSelectedCoachingNoteAction,
   } = usePatientsContext();
 
-  const { data, isLoading, isRefetching, isError, error } = getPatient({
+  const { data, isLoading, isRefetching, isError, error } = useGetPatient({
     patientId,
   });
   const { data: patient } = data || {};

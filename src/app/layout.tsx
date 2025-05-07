@@ -1,13 +1,10 @@
-import './_styles/globals.css';
+import { APP_DESCRIPTION, APP_NAME } from '@/config/main.config';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import Providers from './_components/providers/Providers';
-import { Main } from './_components/layout/Main';
-import { cn } from './_components/components.utils';
-import { APP_MAX_WIDTH } from '@/config/themes.config';
-import { MainLayout } from './_components/layout/MainLayout';
-import { APP_DESCRIPTION, APP_NAME } from '@/config/main.config';
 import { AppToaster } from './_components/layout/AppToaster';
+import { MainLayout } from './_components/layout/MainLayout';
+import Providers from './_components/providers/Providers';
+import './_styles/globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

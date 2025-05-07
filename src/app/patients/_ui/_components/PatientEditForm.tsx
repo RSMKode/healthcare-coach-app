@@ -15,10 +15,10 @@ import { Input } from '@/app/_components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { PatientAddSchema, PatientT } from '../../_core/patients.definitions';
+import { PatientAddSchema, PatientT } from '../../_core/patients/patients.definitions';
 import { usePatientsContext } from '../../context';
-import { usePatients } from '../_hooks/use-patients';
 import { TbEdit } from 'react-icons/tb';
+import { useEditPatient } from '../_hooks/use-patients';
 
 export const PatientAddFormSchema = PatientAddSchema;
 export type PatientAddFormT = z.infer<typeof PatientAddFormSchema>;
@@ -28,8 +28,7 @@ type PatientAddFormProps = {
 };
 export default function PatientAddForm({ patient }: PatientAddFormProps) {
   const { setSelectedPatientAction } = usePatientsContext();
-  const { editPatient } = usePatients();
-  const { mutate, isError, error, isPending } = editPatient({
+  const { mutate, isError, error, isPending } = useEditPatient({
     onSuccess: () => {
       setSelectedPatientAction(null);
     },

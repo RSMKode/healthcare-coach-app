@@ -9,10 +9,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/app/_components/ui/dropdown-menu';
-import { CoachingNoteT } from '@/app/patients/_core/coaching-notes.definitions';
+import { CoachingNoteT } from '@/app/patients/_core/coaching-notes/coaching-notes.definitions';
 import { usePatientsContext } from '@/app/patients/context';
 import { ComponentProps, useState } from 'react';
-import { TbDots, TbEdit, TbNote, TbTrash, TbUser } from 'react-icons/tb';
+import { TbDots, TbEdit, TbNote, TbTrash } from 'react-icons/tb';
 
 type CoachingNoteCardActionMenuProps = ComponentProps<typeof Button> & {
   coachingNote: CoachingNoteT;
@@ -99,3 +99,4 @@ const CoachingNoteCardActionMenu = ({
   );
 };
 export { CoachingNoteCardActionMenu };
+

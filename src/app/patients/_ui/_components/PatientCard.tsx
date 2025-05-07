@@ -1,3 +1,5 @@
+import { Avatar, AvatarFallback } from '@/app/_components/ui/avatar';
+import { Button } from '@/app/_components/ui/button';
 import {
   Card,
   CardContent,
@@ -6,14 +8,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/app/_components/ui/card';
-import React from 'react';
-import { PatientT } from '../../_core/patients.definitions';
-import { Avatar, AvatarFallback } from '@/app/_components/ui/avatar';
 import { getInitialsFromName } from '@/lib/presenter.lib';
-import { Button } from '@/app/_components/ui/button';
-import { ROUTES } from '../../../../config/routes.config';
-import { TbArrowLeftFromArc, TbLink } from 'react-icons/tb';
 import Link from 'next/link';
+import React from 'react';
+import { TbArrowLeftFromArc } from 'react-icons/tb';
+import { ROUTES } from '../../../../config/routes.config';
+import { PatientT } from '../../_core/patients/patients.definitions';
 import { PatientCardActionMenu } from './PatientCardActionMenu';
 
 type PatientCardProps = React.ComponentProps<typeof Card> & {

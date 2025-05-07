@@ -5,12 +5,11 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import {
   addCoachingNoteUseCase,
-  editCoachingNoteUseCase,
   deleteCoachingNoteUseCase,
+  editCoachingNoteUseCase,
   getCoachingNotesUseCase,
   getCoachingNoteUseCase,
-} from '../../_core/coaching-notes.use-cases';
-import page from '@/app/page';
+} from '../../_core/coaching-notes/coaching-notes.use-cases';
 
 type MutationOptionsT = {
   onSuccess?: () => void;
@@ -18,154 +17,123 @@ type MutationOptionsT = {
   onSettled?: () => void;
   onMutate?: () => void;
 };
-export const useCoachingNotes = () => {
+
+export const useGetCoachingNotes = (options: { patientId: string }) => {
+  const { patientId } = options;
+
+  return useQuery({
+    queryKey: [
+      CACHE_TAGS.coachingNotes,
+      {
+        patientId,
+      },
+    ],
+    queryFn: () => getCoachingNotesUseCase(options),
+    retry: false,
+    // retry: 1,
+    // retryDelay: 100,
+  });
+};
+
+export const useGetCoachingNote = (options: { coachingNoteId: string }) => {
+  const { coachingNoteId } = options;
+
+  return useQuery({
+    queryKey: [CACHE_TAGS.coachingNote, { coachingNoteId }],
+    queryFn: () => getCoachingNoteUseCase({ coachingNoteId }),
+  });
+};
+
+export const useAddCoachingNote = (options?: MutationOptionsT) => {
   const queryClient = useQueryClient();
+  const { onSuccess, onError } = options || {};
 
-  const getCoachingNotes = (options: { patientId: string }) => {
-    const { patientId } = options;
+  return useMutation({
+    mutationFn: addCoachingNoteUseCase,
+    onSuccess: ({ data, message }) => {
+      queryClient.invalidateQueries({
+        queryKey: [
+          CACHE_TAGS.coachingNotes,
+          {
+            patientId: data?.patientId,
+          },
+        ],
+      });
+      message && toast.success(message);
+      onSuccess?.();
+    },
+    onError: err => {
+      const error = err as Error;
+      toast.error(error.message);
+      onError?.();
+    },
+  });
+};
 
-    const queryFn = useQuery({
-      queryKey: [
-        CACHE_TAGS.coachingNotes,
-        {
-          patientId,
-        },
-      ],
-      queryFn: () => getCoachingNotesUseCase(options),
-      retry: 1,
-      retryDelay: 100,
-    });
-    return queryFn;
-  };
+export const useEditCoachingNote = (options?: MutationOptionsT) => {
+  const queryClient = useQueryClient();
+  const { onSuccess, onError } = options || {};
 
-  const getCoachingNote = (options: { coachingNoteId: string }) => {
-    const { coachingNoteId } = options;
-    const query = useQuery({
-      queryKey: [CACHE_TAGS.coachingNote, { coachingNoteId }],
-      queryFn: () => getCoachingNoteUseCase({ coachingNoteId }),
-    });
-    return query;
-  };
+  return useMutation({
+    mutationFn: editCoachingNoteUseCase,
+    onSuccess: ({ data, message }) => {
+      queryClient.invalidateQueries({
+        queryKey: [
+          CACHE_TAGS.coachingNotes,
+          {
+            patientId: data?.patientId,
+          },
+        ],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [
+          CACHE_TAGS.coachingNote,
+          {
+            coachingNoteId: data?.id,
+          },
+        ],
+      });
+      message && toast.success(message);
+      onSuccess?.();
+    },
+    onError: err => {
+      const error = err as Error;
+      toast.error(error.message);
+      onError?.();
+    },
+  });
+};
 
-  const addCoachingNote = (options?: MutationOptionsT) => {
-    const { onSuccess, onError } = options || {};
-    const mutation = useMutation({
-      mutationFn: addCoachingNoteUseCase,
-      onSuccess: ({ data, message }) => {
-        queryClient.invalidateQueries({
-          queryKey: [
-            CACHE_TAGS.coachingNotes,
-            {
-              patientId: data.patientId,
-            },
-          ],
-        });
-        // queryClient.invalidateQueries({
-        //   queryKey: [
-        //     CACHE_TAGS.patient,
-        //     {
-        //       patientId: data.patientId,
-        //     },
-        //   ],
-        // });
-        message && toast.success(message);
-        onSuccess?.();
-      },
-      onError: err => {
-        const error = err as Error;
-        toast.error(error.message);
-        onError?.();
-      },
-    });
-    return mutation;
-  };
+export const useDeleteCoachingNote = (options?: MutationOptionsT) => {
+  const queryClient = useQueryClient();
+  const { onSuccess, onError } = options || {};
 
-  const editCoachingNote = (options?: MutationOptionsT) => {
-    const { onSuccess, onError } = options || {};
-    const mutation = useMutation({
-      mutationFn: editCoachingNoteUseCase,
-      onSuccess: ({ data, message }) => {
-        queryClient.invalidateQueries({
-          queryKey: [
-            CACHE_TAGS.coachingNotes,
-            {
-              patientId: data.patientId,
-            },
-          ],
-        });
-        queryClient.invalidateQueries({
-          queryKey: [
-            CACHE_TAGS.coachingNote,
-            {
-              coachingNoteId: data.id,
-            },
-          ],
-        });
-        // queryClient.invalidateQueries({
-        //   queryKey: [
-        //     CACHE_TAGS.patient,
-        //     {
-        //       patientId: data.patientId,
-        //     },
-        //   ],
-        // });
-        message && toast.success(message);
-        onSuccess?.();
-      },
-      onError: err => {
-        const error = err as Error;
-        toast.error(error.message);
-        onError?.();
-      },
-    });
-    return mutation;
-  };
-  const deleteCoachingNote = (options?: MutationOptionsT) => {
-    const { onSuccess, onError } = options || {};
-    const mutation = useMutation({
-      mutationFn: deleteCoachingNoteUseCase,
-      onSuccess: ({ data, message }) => {
-        queryClient.invalidateQueries({
-          queryKey: [
-            CACHE_TAGS.coachingNotes,
-            {
-              patientId: data.patientId,
-            },
-          ],
-        });
-        queryClient.invalidateQueries({
-          queryKey: [
-            CACHE_TAGS.coachingNote,
-            {
-              coachingNoteId: data.id,
-            },
-          ],
-        });
-        // queryClient.invalidateQueries({
-        //   queryKey: [
-        //     CACHE_TAGS.patient,
-        //     {
-        //       patientId: data.patientId,
-        //     },
-        //   ],
-        // });
-        message && toast.success(message);
-        onSuccess?.();
-      },
-      onError: err => {
-        const error = err as Error;
-        toast.error(error.message);
-        onError?.();
-      },
-    });
-    return mutation;
-  };
-
-  return {
-    getCoachingNotes,
-    getCoachingNote,
-    addCoachingNote,
-    editCoachingNote,
-    deleteCoachingNote,
-  };
+  return useMutation({
+    mutationFn: deleteCoachingNoteUseCase,
+    onSuccess: ({ data, message }) => {
+      queryClient.invalidateQueries({
+        queryKey: [
+          CACHE_TAGS.coachingNotes,
+          {
+            patientId: data?.patientId,
+          },
+        ],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [
+          CACHE_TAGS.coachingNote,
+          {
+            coachingNoteId: data?.id,
+          },
+        ],
+      });
+      message && toast.success(message);
+      onSuccess?.();
+    },
+    onError: err => {
+      const error = err as Error;
+      toast.error(error.message);
+      onError?.();
+    },
+  });
 };

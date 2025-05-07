@@ -1,6 +1,5 @@
 import { AppAlertDialog } from '@/app/_components/layout/AppAlertDialog';
-import { useCoachingNotes } from '@/app/patients/_ui/_hooks/use-coaching-notes';
-import { usePatients } from '@/app/patients/_ui/_hooks/use-patients';
+import { useDeleteCoachingNote } from '@/app/patients/_ui/_hooks/use-coaching-notes';
 import { usePatientsContext } from '@/app/patients/context';
 import { TbTrash } from 'react-icons/tb';
 
@@ -12,8 +11,7 @@ export default function CoachingNoteDeleteDialog() {
     setSelectedCoachingNoteAction,
     setSelectedCoachingNote,
   } = usePatientsContext();
-  const { deleteCoachingNote } = useCoachingNotes();
-  const { mutate, isPending } = deleteCoachingNote({
+  const { mutate, isPending } = useDeleteCoachingNote({
     onSuccess: () => {
       setSelectedCoachingNote(null);
       setSelectedCoachingNoteAction(null);

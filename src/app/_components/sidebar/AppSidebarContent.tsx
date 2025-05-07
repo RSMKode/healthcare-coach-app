@@ -1,30 +1,19 @@
 'use client';
 
-import { ROUTES, RoutesT } from '@/config/routes.config';
-import { ChevronRight } from 'lucide-react';
+import { ROUTES } from '@/config/routes.config';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { FaUserNurse } from 'react-icons/fa';
 import { cn } from '../components.utils';
 import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuItem,
   SidebarMenuButton,
-  SidebarMenuAction,
-  SidebarMenuSub,
-  SidebarMenuSubItem,
-  SidebarMenuSubButton,
+  SidebarMenuItem
 } from '../ui/sidebar';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '../ui/collapsible';
-import { FaUserNurse } from 'react-icons/fa';
 
-export type AppSidebarContentProps = {};
 export function AppSidebarContent() {
   const pathname = usePathname();
 

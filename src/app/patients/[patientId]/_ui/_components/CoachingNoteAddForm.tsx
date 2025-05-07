@@ -11,9 +11,8 @@ import {
   FormMessage,
 } from '@/app/_components/ui/form';
 import { Input } from '@/app/_components/ui/input';
-import { CoachingNoteAddSchema } from '@/app/patients/_core/coaching-notes.definitions';
-import { useCoachingNotes } from '@/app/patients/_ui/_hooks/use-coaching-notes';
-import { usePatients } from '@/app/patients/_ui/_hooks/use-patients';
+import { CoachingNoteAddSchema } from '@/app/patients/_core/coaching-notes/coaching-notes.definitions';
+import { useAddCoachingNote } from '@/app/patients/_ui/_hooks/use-coaching-notes';
 import { usePatientsContext } from '@/app/patients/context';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -25,23 +24,21 @@ export const CoachingNoteAddFormSchema = CoachingNoteAddSchema.omit({
 });
 export type CoachingNoteAddFormT = z.infer<typeof CoachingNoteAddFormSchema>;
 
-type CoachingNoteAddFormProps = {};
-export default function CoachingNoteAddForm({}: CoachingNoteAddFormProps) {
+export default function CoachingNoteAddForm() {
   const { selectedPatient, setSelectedCoachingNoteAction } = usePatientsContext();
-  if (!selectedPatient ) return null;
-  const { addCoachingNote } = useCoachingNotes();
-  const { mutate, isError, error, isPending } = addCoachingNote({
+  const { mutate, isError, error, isPending } = useAddCoachingNote({
     onSuccess: () => {
       setSelectedCoachingNoteAction(null);
     },
   });
-
+  
   const form = useForm<CoachingNoteAddFormT>({
     resolver: zodResolver(CoachingNoteAddFormSchema),
     defaultValues: {
       note: '',
     },
   });
+  if (!selectedPatient ) return null;
 
   function onSubmit(values: CoachingNoteAddFormT) {
     if (!selectedPatient) {

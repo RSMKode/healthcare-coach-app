@@ -4,7 +4,6 @@ import CoachingNoteAddForm from './CoachingNoteAddForm';
 
 export default function CoachingNoteAddDialog() {
   const {
-    selectedCoachingNote,
     selectedCoachingNoteAction,
     setSelectedCoachingNoteAction,
     setSelectedCoachingNote,

@@ -1,8 +1,9 @@
-import { cn } from "@/lib/components.lib.ts";
-import Container from "../_layout/Container";
-import Spinner from "../Spinner";
+
 import { ComponentProps } from "react";
 import { SHIMMER_CLASS } from "@/config/themes.config";
+import { Container } from "lucide-react";
+import { cn } from "../components.utils";
+import Spinner from "../ui/spinner";
 
 type LoadingContainerProps = ComponentProps<typeof Container> & {};
 

@@ -7,19 +7,18 @@ import { PARAMS } from '@/config/params.config';
 import { parseAsString, useQueryState, useQueryStates } from 'nuqs';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
-import { usePatients } from '../_hooks/use-patients';
 import { PatientCard } from './PatientCard';
 import { PatientListPagination } from './PatientListPagination';
+import { useGetPatients } from '../_hooks/use-patients';
 
 type PatientListProps = React.ComponentProps<typeof Section>;
-export function PatientList({ ...props }: PatientListProps) {
+export function PatientList() {
   const [query] = useQueryState(PARAMS.query, parseAsString.withDefault(''));
 
   const [pagination] = useQueryStates(paginationSearchParams());
   const { page, pageSize } = pagination;
 
-  const { getPatients } = usePatients();
-  const { data, isLoading, isRefetching, isError, error } = getPatients({
+  const { data, isLoading, isRefetching, isError, error } = useGetPatients({
     page,
     pageSize,
     query,

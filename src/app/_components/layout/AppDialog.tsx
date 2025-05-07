@@ -16,7 +16,6 @@ type AppDialogProps = React.ComponentProps<typeof Dialog> & {
   open?: boolean;
   // setOpen?: (open: boolean) => void;
   trigger?: React.ReactNode;
-  renderContent?: boolean;
   title: React.ReactNode;
   description?: React.ReactNode;
   header?: React.ReactNode;
@@ -30,7 +29,6 @@ const AppDialog = ({
   open,
   // setOpen,
   trigger,
-  renderContent = true,
   title,
   description,
   header,

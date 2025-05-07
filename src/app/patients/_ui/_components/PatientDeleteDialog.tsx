@@ -1,7 +1,7 @@
 import { AppAlertDialog } from '@/app/_components/layout/AppAlertDialog';
 import { TbTrash } from 'react-icons/tb';
 import { usePatientsContext } from '../../context';
-import { usePatients } from '../_hooks/use-patients';
+import { useDeletePatient } from '../_hooks/use-patients';
 
 export default function PatientDeleteDialog() {
   const {
@@ -10,8 +10,7 @@ export default function PatientDeleteDialog() {
     setSelectedPatientAction,
     setSelectedPatient,
   } = usePatientsContext();
-  const { deletePatient } = usePatients();
-  const { mutate, isPending } = deletePatient({
+  const { mutate, isPending } = useDeletePatient({
     onSuccess: () => {
       setSelectedPatientAction(null);
       setSelectedPatient(null);

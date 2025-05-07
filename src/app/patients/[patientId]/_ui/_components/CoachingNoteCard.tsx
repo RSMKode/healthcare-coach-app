@@ -3,7 +3,7 @@ import {
   CardContent,
   CardFooter
 } from '@/app/_components/ui/card';
-import { CoachingNoteT } from '@/app/patients/_core/coaching-notes.definitions';
+import { CoachingNoteT } from '@/app/patients/_core/coaching-notes/coaching-notes.definitions';
 import { CoachingNoteCardActionMenu } from './CoachingNoteCardActionMenu';
 
 type CoachingNoteCardProps = React.ComponentProps<typeof Card> & {

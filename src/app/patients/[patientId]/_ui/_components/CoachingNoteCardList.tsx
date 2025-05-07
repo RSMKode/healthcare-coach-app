@@ -1,26 +1,11 @@
 import { CardGrid } from '@/app/_components/layout/CardGrid';
-import { Avatar, AvatarFallback } from '@/app/_components/ui/avatar';
-import { Button } from '@/app/_components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/app/_components/ui/card';
-import { CoachingNoteT } from '@/app/patients/_core/coaching-notes.definitions';
-import { PatientT } from '@/app/patients/_core/patients.definitions';
-import { ROUTES } from '@/config/routes.config';
-import { getInitialsFromName } from '@/lib/presenter.lib';
-import { Link } from 'lucide-react';
-import { TbArrowLeftFromArc } from 'react-icons/tb';
-import { CoachingNoteCard } from './CoachingNoteCard';
 import InfoLabel from '@/app/_components/layout/InfoLabel';
 import { Section } from '@/app/_components/layout/Section';
-import CoachingNoteAddButton from './CoachingNoteAddButton';
-import { useCoachingNotes } from '@/app/patients/_ui/_hooks/use-coaching-notes';
 import { CardSkeleton } from '@/app/_components/skeletons/CardSkeleton';
+import { PatientT } from '@/app/patients/_core/patients/patients.definitions';
+import CoachingNoteAddButton from './CoachingNoteAddButton';
+import { CoachingNoteCard } from './CoachingNoteCard';
+import { useGetCoachingNotes } from '@/app/patients/_ui/_hooks/use-coaching-notes';
 
 type CoachingNoteCardListProps = React.ComponentProps<'div'> & {
   patient: PatientT;
@@ -30,9 +15,8 @@ export function CoachingNoteCardList({
   patient,
   ...props
 }: CoachingNoteCardListProps) {
-  const { getCoachingNotes } = useCoachingNotes();
 
-  const { data, isLoading, isRefetching, isError, error } = getCoachingNotes({
+  const { data, isLoading, isRefetching, isError, error } = useGetCoachingNotes({
     patientId: patient.id,
   });
   const { data: coachingNotes = [] } = data || {};
@@ -47,7 +31,7 @@ export function CoachingNoteCardList({
         <h2 className="text-xl font-bold leading-none">Coaching Notes</h2>
         <CoachingNoteAddButton />
       </header>
-      {!coachingNotes.length && !isCurrentlyLoading && (
+      {!coachingNotes?.length && !isCurrentlyLoading && (
         <InfoLabel className="w-full">No coaching notes found</InfoLabel>
       )}
       {isCurrentlyLoading && (
@@ -57,7 +41,7 @@ export function CoachingNoteCardList({
           ))}
         </CardGrid>
       )}
-      {!isCurrentlyLoading && coachingNotes.length > 0 && (
+      {!isCurrentlyLoading && coachingNotes && coachingNotes.length > 0 && (
         <CardGrid className="grid-cols-auto-fill">
           {coachingNotes.map(coachingNote => (
             <CoachingNoteCard

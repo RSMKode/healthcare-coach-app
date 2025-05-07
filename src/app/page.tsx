@@ -1,8 +1,9 @@
+"use client"
+
 import { APP_DESCRIPTION, APP_NAME } from '@/config/main.config';
-import Image from 'next/image';
-import { Button } from './_components/ui/button';
-import { TbNurse } from 'react-icons/tb';
 import Link from 'next/link';
+import { TbNurse } from 'react-icons/tb';
+import { Button } from './_components/ui/button';
 
 export default function Home() {
   return (

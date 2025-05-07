@@ -16,18 +16,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { TbPlaylistAdd } from 'react-icons/tb';
 import { z } from 'zod';
-import { PatientAddSchema } from '../../_core/patients.definitions';
+import { PatientAddSchema } from '../../_core/patients/patients.definitions';
 import { usePatientsContext } from '../../context';
-import { usePatients } from '../_hooks/use-patients';
+import { useAddPatient } from '../_hooks/use-patients';
 
 export const PatientAddFormSchema = PatientAddSchema;
 export type PatientAddFormT = z.infer<typeof PatientAddFormSchema>;
 
-type PatientAddFormProps = {};
-export default function PatientAddForm({}: PatientAddFormProps) {
+export default function PatientAddForm() {
   const { setSelectedPatientAction } = usePatientsContext();
-  const { addPatient } = usePatients();
-  const { mutate, isError, error, isPending } = addPatient({
+  const { mutate, isError, error, isPending } = useAddPatient({
     onSuccess: () => {
       setSelectedPatientAction(null);
     },

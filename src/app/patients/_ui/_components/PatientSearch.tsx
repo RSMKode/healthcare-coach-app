@@ -1,10 +1,8 @@
-import { Button } from '@/app/_components/ui/button';
 import { Input } from '@/app/_components/ui/input';
 import Spinner from '@/app/_components/ui/spinner';
 import { PARAMS } from '@/config/params.config';
 import { parseAsString, useQueryState } from 'nuqs';
 import { useTransition } from 'react';
-import { TbX } from 'react-icons/tb';
 import { useDebouncedCallback } from 'use-debounce';
 
 export default function PatientSearch() {

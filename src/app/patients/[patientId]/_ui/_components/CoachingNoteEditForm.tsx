@@ -14,9 +14,9 @@ import { Input } from '@/app/_components/ui/input';
 import {
   CoachingNoteEditSchema,
   CoachingNoteT,
-} from '@/app/patients/_core/coaching-notes.definitions';
-import { PatientT } from '@/app/patients/_core/patients.definitions';
-import { useCoachingNotes } from '@/app/patients/_ui/_hooks/use-coaching-notes';
+} from '@/app/patients/_core/coaching-notes/coaching-notes.definitions';
+import { PatientT } from '@/app/patients/_core/patients/patients.definitions';
+import { useEditCoachingNote } from '@/app/patients/_ui/_hooks/use-coaching-notes';
 import { usePatientsContext } from '@/app/patients/context';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -40,8 +40,7 @@ export default function CoachingNoteEditForm({
   const { setSelectedCoachingNoteAction, setSelectedCoachingNote } =
     usePatientsContext();
 
-  const { editCoachingNote } = useCoachingNotes();
-  const { mutate, isError, error, isPending } = editCoachingNote({
+  const { mutate, isError, error, isPending } = useEditCoachingNote({
     onSuccess: () => {
       setSelectedCoachingNote(null);
       setSelectedCoachingNoteAction(null);
@@ -51,7 +50,7 @@ export default function CoachingNoteEditForm({
   const form = useForm<CoachingNoteEditFormT>({
     resolver: zodResolver(CoachingNoteEditFormSchema),
     defaultValues: {
-      note: '',
+      note: coachingNote.note,
     },
   });
 

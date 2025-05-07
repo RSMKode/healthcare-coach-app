@@ -1,5 +1,4 @@
 import { Avatar, AvatarFallback } from '@/app/_components/ui/avatar';
-import { Button } from '@/app/_components/ui/button';
 import {
   Card,
   CardContent,
@@ -8,11 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/app/_components/ui/card';
-import { PatientT } from '@/app/patients/_core/patients.definitions';
-import { ROUTES } from '@/config/routes.config';
+import { PatientT } from '@/app/patients/_core/patients/patients.definitions';
 import { getInitialsFromName } from '@/lib/presenter.lib';
-import { Link } from 'lucide-react';
-import { TbArrowLeftFromArc } from 'react-icons/tb';
 
 type PatientDetailsProps = React.ComponentProps<typeof Card> & {
   patient: PatientT;

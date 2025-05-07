@@ -3,11 +3,10 @@
 import { cn } from '../components.utils';
 import { AppSidebarTrigger } from '../sidebar/AppSidebarTrigger';
 import ThemePicker from '../theme/ThemePicker';
-import { useState, useEffect } from 'react';
-import { ClearCacheButton } from './ClearCacheButton';
 import { Separator } from '../ui/separator';
 import AppBreadcrumb from './AppBreadcrumb';
 import { BackButton } from './BackButton';
+import { ClearCacheButton } from './ClearCacheButton';
 
 type HeaderProps = {
   children?: React.ReactNode;
