@@ -29,11 +29,15 @@ export const MainLayout = ({
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar />
-      <div className="flex h-screen w-full flex-col items-center overflow-y-auto overflow-x-hidden">
+      <div className="flex h-screen w-full flex-col items-center">
         <Header />
-        <Main className={cn('px-2', APP_MAX_WIDTH, className)} {...props}>
-          {children}
-        </Main>
+        <div className="h-full w-full flex overflow-y-auto overflow-x-hidden justify-center">
+          <Main
+            className={cn('px-2 py-2', APP_MAX_WIDTH, className)}
+            {...props}>
+            {children}
+          </Main>
+        </div>
       </div>
     </SidebarProvider>
   );

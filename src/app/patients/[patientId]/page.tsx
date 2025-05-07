@@ -42,7 +42,7 @@ export default function PatientPage() {
       <header className="flex items-center justify-between w-full gap-2 py-2">
         <h1 className="text-2xl font-bold leading-none">Patient Details</h1>
       </header>
-      <Section className="h-full">
+      <Section >
         {!patient && !isCurrentlyLoading && (
           <InfoLabel className="w-full">Patient not found</InfoLabel>
         )}

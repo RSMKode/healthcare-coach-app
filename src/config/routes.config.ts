@@ -48,7 +48,7 @@ export const ROUTES = {
   home: {
     self: {
       name: 'Home',
-      path: '/dashboard',
+      path: '/',
       icon: TbHome,
       type: 'home',
     },

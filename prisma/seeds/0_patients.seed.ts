@@ -1,4 +1,5 @@
-import type { PrismaClient } from '@prisma/client';
+// import type { PrismaClient } from '@prisma/client';
+import type { PrismaClient } from '../generated/client'; // Adjust the import path as necessary
 
 export const seedPatients = async (prisma: PrismaClient) => {
   const start = Date.now();
@@ -12,10 +13,8 @@ export const seedPatients = async (prisma: PrismaClient) => {
     },
   });
 
-  const patient2 = await prisma.patient.upsert({
-    where: { name: 'Jane Smith' },
-    update: {},
-    create: {
+  const patient2 = await prisma.patient.create({
+    data: {
       name: 'Jane Smith',
       age: 38,
       primaryCondition: 'HBP',

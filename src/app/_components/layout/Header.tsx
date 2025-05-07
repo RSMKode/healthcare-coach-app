@@ -31,7 +31,7 @@ export default function Header({ children, className }: HeaderProps) {
           size="icon"
           className=""
         />
-        <AppBreadcrumb homeLink="/dashboard" />
+        <AppBreadcrumb/>
         {children}
       </div>
       <div className="flex items-center gap-1 @md:gap-2">

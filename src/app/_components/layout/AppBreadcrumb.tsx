@@ -34,7 +34,7 @@ export type AppBreadcrumbProps = {
 
 export default function AppBreadcrumb({
   className,
-  homeLink = '/',
+  homeLink = ROUTES.home.self.path,
   color = false,
 }: AppBreadcrumbProps) {
   const path = usePathname();

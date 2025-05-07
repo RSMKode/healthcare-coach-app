@@ -10,6 +10,7 @@ import { toast } from 'sonner';
 import { PatientCard } from './PatientCard';
 import { PatientListPagination } from './PatientListPagination';
 import { useGetPatients } from '../_hooks/use-patients';
+import { cn } from '@/app/_components/components.utils';
 
 type PatientListProps = React.ComponentProps<typeof Section>;
 export function PatientList() {
@@ -40,9 +41,9 @@ export function PatientList() {
   const currentlyLoading = isLoading || isRefetching;
 
   return (
-    <>
+    <Section className="">
       {
-        <CardGrid>
+        <CardGrid className="px-1">
           {currentlyLoading
             ? fakePatients.map((_, index) => <CardSkeleton key={index} />)
             : patients?.map(patient => (
@@ -53,7 +54,15 @@ export function PatientList() {
       {(!patients || patients?.length === 0) && !currentlyLoading && (
         <InfoLabel>{`No patients found for "${query}"`}</InfoLabel>
       )}
-      {patients?.length && <PatientListPagination pageCount={pageCount} />}
-    </>
+      {/* {patients?.length && ( */}
+      <PatientListPagination
+        pageCount={pageCount}
+        className={cn(
+          'bottom-0 sticky py-2 px-1 bg-background/75 backdrop-blur rounded-t-lg',
+          pageCount <= 0 && "opacity-60 pointer-events-none"
+        )}
+      />
+      {/* )} */}
+    </Section>
   );
 }

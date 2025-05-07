@@ -20,14 +20,12 @@ export default function PatientsPage() {
 
   return (
     <>
-      <header className="flex items-center justify-between w-full gap-2 py-2">
+      <header className="flex items-center justify-between w-full gap-2 px-1 py-2 sticky top-0 z-20 bg-background/75 backdrop-blur-md rounded-b-lg">
         <h1 className="text-2xl font-bold leading-none">Patients</h1>
         <PatientAddButton />
-      </header>
-      <Section className="h-full">
         <PatientSearch />
-        <PatientList />
-      </Section>
+      </header>
+      <PatientList />
       <PatientAddDialog />
       <PatientEditDialog />
       <PatientDeleteDialog />

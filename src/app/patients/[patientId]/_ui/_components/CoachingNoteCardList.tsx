@@ -26,7 +26,7 @@ export function CoachingNoteCardList({
   const fakeCoachingNotes = Array.from({ length: fakeCoachingNoteCount });
 
   return (
-    <Section>
+    <Section className='overflow-y-auto'>
       <header className="flex items-center justify-between w-full gap-2 py-2">
         <h2 className="text-xl font-bold leading-none">Coaching Notes</h2>
         <CoachingNoteAddButton />

@@ -1,4 +1,5 @@
-import type { PrismaClient } from '@prisma/client';
+// import type { PrismaClient } from '@prisma/client';
+import type { PrismaClient } from '../generated/client'; // Adjust the import path as necessary
 
 export const seedCoachingNotes = async (
   prisma: PrismaClient,

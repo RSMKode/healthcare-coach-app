@@ -14,7 +14,7 @@ export default function Home() {
       </h1>
       <p className="text-lg mt-2">{APP_DESCRIPTION}</p>
       <Button variant="link" size={"lg"} className="text-notice" asChild>
-        <Link href="/patients">Go to Dashboard</Link>
+        <Link href="/patients">Go to Patients Dashboard</Link>
       </Button>
     </div>
   );

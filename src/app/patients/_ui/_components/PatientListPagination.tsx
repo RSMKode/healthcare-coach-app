@@ -91,7 +91,7 @@ export const PatientListPagination = ({
             <SelectContent side="top">
               {pageSizeOptions.map(pageSize => (
                 <SelectItem key={pageSize} value={`${pageSize}`}>
-                  {pageSize || 'Todo'}
+                  {pageSize || 'All'}
                 </SelectItem>
               ))}
             </SelectContent>

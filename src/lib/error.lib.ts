@@ -53,7 +53,7 @@ export const handleResponseError = <T>(
     dataNull = false,
   } = options ?? {};
 
-  if (authorization && response.status === 401) {
+  if (authentication && response.status === 401) {
     throw new AuthenticationError(`${response.message}`);
   }
   if (authorization && response.status === 403) {
