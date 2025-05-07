@@ -85,7 +85,7 @@ const AppAlertDialog = ({
                   onClick={() => onCancelClick?.()}>
                   {cancelButtonChildren ?? (
                     <>
-                      <span>Cancelar</span>
+                      <span>Cancel</span>
                       <MdOutlineCancel className="size-5" />
                     </>
                   )}

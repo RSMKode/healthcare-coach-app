@@ -28,6 +28,12 @@ npx prisma migrate deploy --name init
 npx prisma generate
 ```
 
+### Seed the database
+
+```bash
+npx prisma db seed
+```
+
 ### Build the project
 
 ```bash

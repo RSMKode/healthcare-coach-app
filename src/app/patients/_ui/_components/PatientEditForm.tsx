@@ -95,7 +95,7 @@ export default function PatientAddForm({ patient }: PatientAddFormProps) {
             )}
           />
           <Button type="submit" isPending={isPending} className="w-full">
-            <span>Submit</span>
+            <span>Edit</span>
             <TbEdit className="size-4" />
           </Button>
         </form>

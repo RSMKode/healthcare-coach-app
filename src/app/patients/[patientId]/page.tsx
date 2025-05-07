@@ -3,7 +3,7 @@
 import InfoLabel from '@/app/_components/layout/InfoLabel';
 import { Section } from '@/app/_components/layout/Section';
 import { CardSkeleton } from '@/app/_components/skeletons/CardSkeleton';
-import { notFound, useParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { usePatientsContext } from '../context';
 import CoachingNoteAddDialog from './_ui/_components/CoachingNoteAddDialog';

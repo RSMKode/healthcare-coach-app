@@ -20,7 +20,7 @@ import { useEditCoachingNote } from '@/app/patients/_ui/_hooks/use-coaching-note
 import { usePatientsContext } from '@/app/patients/context';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { TbPlaylistAdd } from 'react-icons/tb';
+import { TbEdit, TbPlaylistAdd } from 'react-icons/tb';
 import { z } from 'zod';
 
 export const CoachingNoteEditFormSchema = CoachingNoteEditSchema.omit({
@@ -81,8 +81,8 @@ export default function CoachingNoteEditForm({
             )}
           />
           <Button type="submit" isPending={isPending} className="w-full">
-            <span>Submit</span>
-            <TbPlaylistAdd className="size-4" />
+            <span>Edit</span>
+            <TbEdit className="size-4" />
           </Button>
         </form>
       </Form>

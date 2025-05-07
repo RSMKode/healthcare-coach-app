@@ -69,11 +69,11 @@ export function AppSidebarFooter() {
                         {user.role}
                       </span>
                       <div className="flex flex-col gap-x-2 text-foreground/80">
-                        <span className="truncate text-xs font-semibold ">
-                          Company {user.company}
+                        <span className="truncate text-xs text-primary/80">
+                          <span className='text-primary/50'>Company</span> {user.company}
                         </span>
-                        <span className="truncate text-xs font-semibold">
-                          Email {user.email}
+                        <span className="truncate text-xs text-primary/80">
+                          <span className='text-primary/50'>Email</span> {user.email}
                         </span>
                       </div>
                     </div>

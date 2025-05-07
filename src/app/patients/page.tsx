@@ -20,9 +20,11 @@ export default function PatientsPage() {
 
   return (
     <>
-      <header className="flex items-center justify-between w-full gap-2 px-1 py-2 sticky top-0 z-20 bg-background/75 backdrop-blur-md rounded-b-lg">
-        <h1 className="text-2xl font-bold leading-none">Patients</h1>
-        <PatientAddButton />
+      <header className="flex flex-col items-center justify-between w-full gap-4 px-1 py-2 sticky top-0 z-20 bg-background/75 backdrop-blur-md rounded-b-lg">
+        <div className='flex items-center gap-2 w-full justify-between'>
+          <h1 className="text-2xl font-bold leading-none">Patients</h1>
+          <PatientAddButton />
+        </div>
         <PatientSearch />
       </header>
       <PatientList />

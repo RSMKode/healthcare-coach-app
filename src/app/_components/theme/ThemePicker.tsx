@@ -23,17 +23,17 @@ const THEMES: {
   Icon: IconType;
 }[] = [
   {
-    label: "Claro",
+    label: "Light",
     className: "light",
     Icon: TbSunFilled,
   },
   {
-    label: "Oscuro",
+    label: "Dark",
     className: "dark",
     Icon: TbMoonFilled,
   },
   {
-    label: "Sistema",
+    label: "System",
     className: "system",
     Icon: VscColorMode,
   },

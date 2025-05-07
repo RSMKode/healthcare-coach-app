@@ -69,7 +69,7 @@ export default function CoachingNoteAddForm() {
             )}
           />
           <Button type="submit" isPending={isPending} className="w-full">
-            <span>Submit</span>
+            <span>Add</span>
             <TbPlaylistAdd className="size-4" />
           </Button>
         </form>

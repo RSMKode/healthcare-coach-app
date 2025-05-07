@@ -92,7 +92,7 @@ export default function PatientAddForm() {
             )}
           />
           <Button type="submit" isPending={isPending} className="w-full">
-            <span>Submit</span>
+            <span>Add</span>
             <TbPlaylistAdd className="size-4" />
           </Button>
         </form>
