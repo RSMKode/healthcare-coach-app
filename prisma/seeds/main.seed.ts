@@ -1,10 +1,10 @@
 import { PrismaClient } from '../generated/client';
 // import { PrismaClient } from '@prisma/client';
-// import { prisma } from '../../src/lib/prisma.lib';
+import { prisma } from '../../src/lib/prisma.lib';
 import { seedPatients } from './0_patients.seed';
 import { seedCoachingNotes } from './1_coaching-notes.seed';
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 async function main() {
   const start = new Date();
