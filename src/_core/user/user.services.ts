@@ -1,3 +1,4 @@
+// User mock service. Could be in a JWT or similar.
 export const getUser = () => ({
   name: 'Mike Smith',
   username: 'mike.smith',

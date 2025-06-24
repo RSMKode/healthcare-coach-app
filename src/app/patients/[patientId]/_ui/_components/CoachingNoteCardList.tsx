@@ -2,10 +2,10 @@ import { CardGrid } from '@/app/_components/layout/CardGrid';
 import InfoLabel from '@/app/_components/layout/InfoLabel';
 import { Section } from '@/app/_components/layout/Section';
 import { CardSkeleton } from '@/app/_components/skeletons/CardSkeleton';
-import { PatientT } from '@/app/patients/_core/patients/patients.definitions';
 import CoachingNoteAddButton from './CoachingNoteAddButton';
 import { CoachingNoteCard } from './CoachingNoteCard';
 import { useGetCoachingNotes } from '@/app/patients/_ui/_hooks/use-coaching-notes';
+import { PatientT } from '@/_core/patients/patients.definitions';
 
 type CoachingNoteCardListProps = React.ComponentProps<'div'> & {
   patient: PatientT;

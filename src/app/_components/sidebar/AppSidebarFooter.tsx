@@ -1,6 +1,5 @@
 'use client';
 
-import { getUser } from '@/app/api/user.services';
 import { getInitialsFromName } from '@/lib/presenter.lib';
 import {
   DropdownMenu,
@@ -19,9 +18,11 @@ import {
   SidebarMenuItem,
 } from '../ui/sidebar';
 import { LogoutButton } from './LogoutButton';
+import { getUserUseCase } from '@/_core/user/user.use-cases';
 
 export function AppSidebarFooter() {
-  const user = getUser();
+
+  const user = getUserUseCase();
 
   const UserAvatar = (
     <Avatar className="size-8 rounded-lg">

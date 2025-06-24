@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { Patient } from '../../../../../prisma/generated/client';
 import { CoachingNoteApiT, CoachingNoteSchema, coachingNoteAdapter } from '../coaching-notes/coaching-notes.definitions';
+import { Patient } from '@prisma/client';
 
 
 export const PatientActionSchema = z

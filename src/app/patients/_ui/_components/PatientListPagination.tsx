@@ -1,10 +1,7 @@
 'use client';
 
-import {
-  DEFAULT_PAGE_INDEX,
-  DEFAULT_PAGE_SIZE,
-  PAGINATION_OPTIONS,
-} from '@/_shared/pagination.search-params';
+
+import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE, PAGINATION_OPTIONS } from '@/_core/_shared/pagination.search-params';
 import { cn } from '@/app/_components/components.utils';
 import { Button } from '@/app/_components/ui/button';
 import {
