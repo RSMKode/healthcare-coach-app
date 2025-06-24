@@ -39,6 +39,7 @@ export default function PatientDeleteDialog() {
         setSelectedPatientAction(null);
         setSelectedPatient(null);
       }}
+      isActionDestructive={true}
       actionButtonChildren={
         <span className="flex items-center gap-2">
           Delete Patient

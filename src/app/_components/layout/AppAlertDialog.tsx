@@ -91,11 +91,9 @@ const AppAlertDialog = ({
                   )}
                 </Button>
               </AlertDialogCancel>
-              <AlertDialogAction asChild>
+              <AlertDialogAction asChild isActionDestructive={isActionDestructive}>
                 <Button
                   isPending={isActionPending}
-                  variant={isActionDestructive ? 'destructive' : 'default'}
-                  className={cn('', isActionDestructive && 'bg-destructive text-foreground')}
                   border={2}
                   onClick={() => onActionClick?.()}>
                   {actionButtonChildren ?? (
