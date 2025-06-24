@@ -13,8 +13,8 @@ import Link from 'next/link';
 import React from 'react';
 import { TbArrowLeftFromArc } from 'react-icons/tb';
 import { ROUTES } from '../../../../config/routes.config';
-import { PatientT } from '../../_core/patients/patients.definitions';
 import { PatientCardActionMenu } from './PatientCardActionMenu';
+import { PatientT } from '@/_core/patients/patients.definitions';
 
 type PatientCardProps = React.ComponentProps<typeof Card> & {
   patient: PatientT;

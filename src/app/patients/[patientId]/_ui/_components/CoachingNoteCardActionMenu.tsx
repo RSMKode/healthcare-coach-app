@@ -1,3 +1,4 @@
+import { CoachingNoteT } from '@/_core/coaching-notes/coaching-notes.definitions';
 import { cn } from '@/app/_components/components.utils';
 import { Button } from '@/app/_components/ui/button';
 import {
@@ -9,7 +10,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/app/_components/ui/dropdown-menu';
-import { CoachingNoteT } from '@/app/patients/_core/coaching-notes/coaching-notes.definitions';
 import { usePatientsContext } from '@/app/patients/context';
 import { ComponentProps, useState } from 'react';
 import { TbDots, TbEdit, TbNote, TbTrash } from 'react-icons/tb';

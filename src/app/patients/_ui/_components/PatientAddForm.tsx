@@ -16,9 +16,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { TbPlaylistAdd } from 'react-icons/tb';
 import { z } from 'zod';
-import { PatientAddSchema } from '../../_core/patients/patients.definitions';
 import { usePatientsContext } from '../../context';
 import { useAddPatient } from '../_hooks/use-patients';
+import { PatientAddSchema } from '@/_core/patients/patients.definitions';
 
 export const PatientAddFormSchema = PatientAddSchema;
 export type PatientAddFormT = z.infer<typeof PatientAddFormSchema>;

@@ -1,5 +1,6 @@
 'use client';
 
+import { CoachingNoteAddSchema } from '@/_core/coaching-notes/coaching-notes.definitions';
 import ErrorLabel from '@/app/_components/layout/ErrorLabel';
 import { Button } from '@/app/_components/ui/button';
 import {
@@ -11,7 +12,6 @@ import {
   FormMessage,
 } from '@/app/_components/ui/form';
 import { Input } from '@/app/_components/ui/input';
-import { CoachingNoteAddSchema } from '@/app/patients/_core/coaching-notes/coaching-notes.definitions';
 import { useAddCoachingNote } from '@/app/patients/_ui/_hooks/use-coaching-notes';
 import { usePatientsContext } from '@/app/patients/context';
 import { zodResolver } from '@hookform/resolvers/zod';

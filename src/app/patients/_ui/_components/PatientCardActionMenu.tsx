@@ -16,8 +16,8 @@ import {
   TbTrash,
   TbUser
 } from 'react-icons/tb';
-import { PatientT } from '../../_core/patients/patients.definitions';
 import { usePatientsContext } from '../../context';
+import { PatientT } from '@/_core/patients/patients.definitions';
 
 type PatientCardActionMenuProps = ComponentProps<typeof Button> & {
   patient: PatientT;

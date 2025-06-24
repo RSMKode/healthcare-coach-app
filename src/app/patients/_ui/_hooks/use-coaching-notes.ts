@@ -1,15 +1,10 @@
 'use client';
 
+import { getCoachingNotesUseCase, getCoachingNoteUseCase, addCoachingNoteUseCase, editCoachingNoteUseCase, deleteCoachingNoteUseCase } from '@/_core/coaching-notes/coaching-notes.use-cases';
 import { CACHE_TAGS } from '@/config/cache-tags.config';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import {
-  addCoachingNoteUseCase,
-  deleteCoachingNoteUseCase,
-  editCoachingNoteUseCase,
-  getCoachingNotesUseCase,
-  getCoachingNoteUseCase,
-} from '../../_core/coaching-notes/coaching-notes.use-cases';
+
 
 type MutationOptionsT = {
   onSuccess?: () => void;

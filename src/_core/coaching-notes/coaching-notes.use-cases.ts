@@ -10,6 +10,8 @@ import {
   CoachingNoteEditT,
 } from './coaching-notes.definitions';
 
+//? Here the use cases for coaching notes are defined. These use cases are functions that encapsulate business logic and are responsible for calling the data access layer, where persistence is handled.
+
 export const getCoachingNotesUseCase = async (options: {
   patientId: string;
 }) => {

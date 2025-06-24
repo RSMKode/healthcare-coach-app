@@ -1,5 +1,10 @@
 'use client';
 
+import {
+  CoachingNoteEditSchema,
+  CoachingNoteT,
+} from '@/_core/coaching-notes/coaching-notes.definitions';
+import { PatientT } from '@/_core/patients/patients.definitions';
 import ErrorLabel from '@/app/_components/layout/ErrorLabel';
 import { Button } from '@/app/_components/ui/button';
 import {
@@ -11,16 +16,12 @@ import {
   FormMessage,
 } from '@/app/_components/ui/form';
 import { Input } from '@/app/_components/ui/input';
-import {
-  CoachingNoteEditSchema,
-  CoachingNoteT,
-} from '@/app/patients/_core/coaching-notes/coaching-notes.definitions';
-import { PatientT } from '@/app/patients/_core/patients/patients.definitions';
+
 import { useEditCoachingNote } from '@/app/patients/_ui/_hooks/use-coaching-notes';
 import { usePatientsContext } from '@/app/patients/context';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { TbEdit, TbPlaylistAdd } from 'react-icons/tb';
+import { TbEdit } from 'react-icons/tb';
 import { z } from 'zod';
 
 export const CoachingNoteEditFormSchema = CoachingNoteEditSchema.omit({

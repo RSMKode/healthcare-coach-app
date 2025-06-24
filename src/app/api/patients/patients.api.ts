@@ -1,14 +1,11 @@
 'use server';
 
+import { patientAdapter, PatientAddT, PatientEditT } from '@/_core/patients/patients.definitions';
 import { delay } from '@/lib/helpers.lib';
 import { getPaginatedResults } from '@/lib/pagination.lib';
 import { prisma } from '@/lib/prisma.lib';
 import { normalizeString } from '@/lib/utils';
-import {
-  patientAdapter,
-  PatientAddT,
-  PatientEditT,
-} from './patients.definitions';
+
 
 export const getPatientsAPI = async (options: {
   page?: number;

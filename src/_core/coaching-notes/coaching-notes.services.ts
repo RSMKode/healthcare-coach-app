@@ -1,12 +1,7 @@
-import { ApiResponseT } from '@/_shared/api.definitions';
-import { handleResponseError } from '../../../../lib/error.lib';
-import {
-  addCoachingNoteAPI,
-  deleteCoachingNoteAPI,
-  editCoachingNoteAPI,
-  getCoachingNoteAPI,
-  getCoachingNotesByPatientIdAPI,
-} from './coaching-notes.api';
+
+import { getCoachingNotesByPatientIdAPI, getCoachingNoteAPI, addCoachingNoteAPI, editCoachingNoteAPI, deleteCoachingNoteAPI } from '@/app/api/coaching-notes/coaching-notes.api';
+import { handleResponseError } from '@/lib/error.lib';
+import { ApiResponseT } from '../_shared/api.definitions';
 import {
   CoachingNoteAddT,
   CoachingNoteEditT

@@ -1,12 +1,9 @@
 'use server';
 
 import { prisma } from '@/lib/prisma.lib';
-import {
-  coachingNoteAdapter,
-  CoachingNoteAddT,
-  CoachingNoteEditT,
-} from './coaching-notes.definitions';
+
 import { delay } from '@/lib/helpers.lib';
+import { coachingNoteAdapter, CoachingNoteAddT, CoachingNoteEditT } from '@/_core/coaching-notes/coaching-notes.definitions';
 
 export const getCoachingNotesByPatientIdAPI = async (options: {
   patientId: string;

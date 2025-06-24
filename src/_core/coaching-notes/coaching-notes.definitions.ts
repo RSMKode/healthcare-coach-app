@@ -1,5 +1,5 @@
+import { CoachingNote } from '@prisma/client';
 import { z } from 'zod';
-import { CoachingNote } from '../../../../../prisma/generated/client';
 
 export const CoachingNoteActionSchema = z
   .enum(['add', 'edit', 'delete'])

@@ -1,5 +1,5 @@
-import { PrismaClient } from '../generated/client';
-// import { PrismaClient } from '@prisma/client';
+// import { PrismaClient } from '../generated/client';
+import { PrismaClient } from '@prisma/client';
 import { prisma } from '../../src/lib/prisma.lib';
 import { seedPatients } from './0_patients.seed';
 import { seedCoachingNotes } from './1_coaching-notes.seed';

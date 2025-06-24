@@ -1,4 +1,3 @@
-import { paginationSearchParams } from '@/_shared/pagination.search-params';
 import { CardGrid } from '@/app/_components/layout/CardGrid';
 import InfoLabel from '@/app/_components/layout/InfoLabel';
 import { Section } from '@/app/_components/layout/Section';
@@ -11,6 +10,7 @@ import { PatientCard } from './PatientCard';
 import { PatientListPagination } from './PatientListPagination';
 import { useGetPatients } from '../_hooks/use-patients';
 import { cn } from '@/app/_components/components.utils';
+import { paginationSearchParams } from '@/_core/_shared/pagination.search-params';
 
 type PatientListProps = React.ComponentProps<typeof Section>;
 export function PatientList() {

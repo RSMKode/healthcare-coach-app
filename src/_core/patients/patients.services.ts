@@ -1,17 +1,12 @@
 'use server';
 
-import { handleResponseError, NotFoundError } from '@/lib/error.lib';
-import { delay } from '@/lib/helpers.lib';
-import { getPaginatedResults } from '@/lib/pagination.lib';
-import { prisma } from '@/lib/prisma.lib';
-import { normalizeString } from '@/lib/utils';
+import { addPatientAPI, deletePatientAPI, editPatientAPI, getPatientAPI, getPatientsAPI } from '@/app/api/patients/patients.api';
+import { handleResponseError } from '@/lib/error.lib';
+import { ApiResponseT } from '../_shared/api.definitions';
 import {
-  patientAdapter,
   PatientAddT,
-  PatientEditT,
+  PatientEditT
 } from './patients.definitions';
-import { addPatientAPI, deletePatientAPI, editPatientAPI, getPatientAPI, getPatientsAPI } from './patients.api';
-import { ApiResponseT } from '@/_shared/api.definitions';
 
 //? Here it simulates the call to the API, in a real application, this would be replaced by the actual API call
 

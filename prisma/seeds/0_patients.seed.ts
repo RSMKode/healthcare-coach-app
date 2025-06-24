@@ -1,5 +1,5 @@
-// import type { PrismaClient } from '@prisma/client';
-import type { PrismaClient } from '../generated/client'; // Adjust the import path as necessary
+import type { PrismaClient } from '@prisma/client';
+// import type { PrismaClient } from '../generated/client'; // Adjust the import path as necessary
 
 export const seedPatients = async (prisma: PrismaClient) => {
   const start = Date.now();

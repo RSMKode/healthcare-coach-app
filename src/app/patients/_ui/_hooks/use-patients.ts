@@ -1,15 +1,10 @@
 'use client';
 
+import { getPatientsUseCase, getPatientUseCase, addPatientUseCase, editPatientUseCase, deletePatientUseCase } from '@/_core/patients/patients.use-cases';
 import { CACHE_TAGS } from '@/config/cache-tags.config';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import {
-  addPatientUseCase,
-  deletePatientUseCase,
-  getPatientUseCase,
-  getPatientsUseCase,
-  editPatientUseCase,
-} from '../../_core/patients/patients.use-cases';
+
 
 type MutationOptionsT = {
   onSuccess?: () => void;

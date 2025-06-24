@@ -15,10 +15,10 @@ import { Input } from '@/app/_components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { PatientAddSchema, PatientT } from '../../_core/patients/patients.definitions';
 import { usePatientsContext } from '../../context';
 import { TbEdit } from 'react-icons/tb';
 import { useEditPatient } from '../_hooks/use-patients';
+import { PatientAddSchema, PatientT } from '@/_core/patients/patients.definitions';
 
 export const PatientAddFormSchema = PatientAddSchema;
 export type PatientAddFormT = z.infer<typeof PatientAddFormSchema>;
