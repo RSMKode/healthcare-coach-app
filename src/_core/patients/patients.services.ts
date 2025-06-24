@@ -1,6 +1,6 @@
 'use server';
 
-import { addPatientAPI, deletePatientAPI, editPatientAPI, getPatientAPI, getPatientsAPI } from '@/app/api/patients/patients.api';
+import { addPatientAPI, deletePatientAPI, editPatientAPI, getPatientAPI, getPatientsAPI } from '@/app/_api/patients/patients.api';
 import { handleResponseError } from '@/lib/error.lib';
 import { ApiResponseT } from '../_shared/api.definitions';
 import {

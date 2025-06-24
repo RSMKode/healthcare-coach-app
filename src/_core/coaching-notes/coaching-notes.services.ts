@@ -1,5 +1,5 @@
 
-import { getCoachingNotesByPatientIdAPI, getCoachingNoteAPI, addCoachingNoteAPI, editCoachingNoteAPI, deleteCoachingNoteAPI } from '@/app/api/coaching-notes/coaching-notes.api';
+import { getCoachingNotesByPatientIdAPI, getCoachingNoteAPI, addCoachingNoteAPI, editCoachingNoteAPI, deleteCoachingNoteAPI } from '@/app/_api/coaching-notes/coaching-notes.api';
 import { handleResponseError } from '@/lib/error.lib';
 import { ApiResponseT } from '../_shared/api.definitions';
 import {
