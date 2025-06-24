@@ -2,6 +2,14 @@
 
 This is a challenge about creating a Dashboard application for coaching patients and help them to improve their health.
 
+## Building with Docker
+
+If you want to build the project using Docker, you can use the provided `docker-compose.yml` file. This will set up the necessary environment for the application.
+
+```bash
+docker-compose up --build
+```
+
 ## Building Steps
 
 ### Install dependencies
