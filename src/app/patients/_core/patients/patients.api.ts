@@ -15,7 +15,7 @@ export const getPatientsAPI = async (options: {
   pageSize?: number;
   query?: string;
 }) => {
-  await delay(500);
+  await delay(300);
   const { page = 1, pageSize = 20, query } = options;
 
   const patients = await prisma.patient.findMany({
@@ -66,7 +66,7 @@ export const getPatientsAPI = async (options: {
 };
 
 export const getPatientAPI = async (options: { patientId: string }) => {
-  await delay(500);
+  await delay(300);
 
   const { patientId } = options;
   const patient = await prisma.patient.findUnique({
@@ -92,7 +92,7 @@ export const getPatientAPI = async (options: { patientId: string }) => {
 };
 
 export const addPatientAPI = async (data: PatientAddT) => {
-  await delay(500);
+  await delay(300);
 
   try {
     const patient = await prisma.patient.create({ data });
@@ -114,7 +114,7 @@ export const addPatientAPI = async (data: PatientAddT) => {
 };
 
 export const editPatientAPI = async (data: PatientEditT) => {
-  await delay(500);
+  await delay(300);
 
   try {
     const patient = await prisma.patient.update({
@@ -139,7 +139,7 @@ export const editPatientAPI = async (data: PatientEditT) => {
 };
 
 export const deletePatientAPI = async (data: { patientId: string }) => {
-  await delay(500);
+  await delay(300);
 
   const { patientId } = data;
 

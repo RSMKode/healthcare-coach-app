@@ -21,7 +21,8 @@ export function CoachingNoteCardList({
   });
   const { data: coachingNotes = [] } = data || {};
 
-  const isCurrentlyLoading = isLoading || isRefetching;
+  // const isCurrentlyLoading = isLoading || isRefetching;
+  const isCurrentlyLoading = isLoading;
   const fakeCoachingNoteCount = 6;
   const fakeCoachingNotes = Array.from({ length: fakeCoachingNoteCount });
 

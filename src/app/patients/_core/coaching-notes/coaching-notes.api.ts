@@ -11,7 +11,7 @@ import { delay } from '@/lib/helpers.lib';
 export const getCoachingNotesByPatientIdAPI = async (options: {
   patientId: string;
 }) => {
-  await delay(500);
+  await delay(300);
 
   const { patientId } = options;
   const coachingNotes = await prisma.coachingNote.findMany({
@@ -36,7 +36,7 @@ export const getCoachingNotesByPatientIdAPI = async (options: {
 };
 
 export const getCoachingNoteAPI = async (options: { coachingNoteId: string }) => {
-  await delay(500);
+  await delay(300);
 
   const { coachingNoteId } = options;
   const coachingNote = await prisma.coachingNote.findUnique({
@@ -60,7 +60,7 @@ export const getCoachingNoteAPI = async (options: { coachingNoteId: string }) =>
 };
 
 export const addCoachingNoteAPI = async (data: CoachingNoteAddT) => {
-  await delay(500);
+  await delay(300);
 
   try {
     const coachingNote = await prisma.coachingNote.create({
@@ -83,7 +83,7 @@ export const addCoachingNoteAPI = async (data: CoachingNoteAddT) => {
 };
 
 export const editCoachingNoteAPI = async (data: CoachingNoteEditT) => {
-  await delay(500);
+  await delay(300);
 
   try {
     const coachingNote = await prisma.coachingNote.update({
@@ -107,7 +107,7 @@ export const editCoachingNoteAPI = async (data: CoachingNoteEditT) => {
 };
 
 export const deleteCoachingNoteAPI = async (data: { coachingNoteId: string }) => {
-  await delay(500);
+  await delay(300);
 
   try {
     const coachingNote = await prisma.coachingNote.delete({

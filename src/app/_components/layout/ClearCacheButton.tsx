@@ -38,8 +38,8 @@ export const ClearCacheButton = ({
 
   const queryClient = useQueryClient();
 
-  const tooltipMessage = 'Clean cache';
-  const message = 'Cache cleaned successfully';
+  const tooltipMessage = 'Reload';
+  const message = 'Data reloaded successfully';
 
   return (
     <Button

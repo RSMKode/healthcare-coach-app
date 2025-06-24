@@ -9,6 +9,10 @@ export const PatientActionSchema = z
 export type PatientActionT = z.infer<typeof PatientActionSchema>;
 
 
+export type PatientApiT = Patient & {
+  coachingNotes?: CoachingNoteApiT[];
+}
+
 export const PatientSchema = z.object({
   id: z.string().cuid(),
   name: z.string().min(1).max(200),
@@ -18,9 +22,7 @@ export const PatientSchema = z.object({
   createdAt: z.date(),
   updatedAt: z.date(),
 });
-export type PatientApiT = Patient & {
-  coachingNotes?: CoachingNoteApiT[];
-}
+
 export type PatientT = z.infer<typeof PatientSchema>;
 
 export const patientAdapter = (patient: PatientApiT): PatientT => ({

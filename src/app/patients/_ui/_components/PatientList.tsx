@@ -38,20 +38,21 @@ export function PatientList() {
 
   console.log('patients', patients);
 
-  const currentlyLoading = isLoading || isRefetching;
+  // const isCurrentlyLoading = isLoading || isRefetching;
+  const isCurrentlyLoading = isLoading;
 
   return (
     <Section className="">
       {
         <CardGrid className="px-1">
-          {currentlyLoading
+          {isCurrentlyLoading
             ? fakePatients.map((_, index) => <CardSkeleton key={index} />)
             : patients?.map(patient => (
                 <PatientCard patient={patient} key={patient.id} />
               ))}
         </CardGrid>
       }
-      {(!patients || patients?.length === 0) && !currentlyLoading && (
+      {(!patients || patients?.length === 0) && !isCurrentlyLoading && (
         <InfoLabel>{`No patients found for "${query}"`}</InfoLabel>
       )}
       {/* {patients?.length && ( */}
@@ -59,7 +60,7 @@ export function PatientList() {
         pageCount={pageCount}
         className={cn(
           'bottom-0 sticky py-2 px-1 bg-background/75 backdrop-blur rounded-t-lg',
-          pageCount <= 0 && "opacity-60 pointer-events-none"
+          pageCount <= 0 && 'opacity-60 pointer-events-none'
         )}
       />
       {/* )} */}
