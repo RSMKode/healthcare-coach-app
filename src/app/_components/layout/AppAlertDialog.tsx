@@ -95,7 +95,7 @@ const AppAlertDialog = ({
                 <Button
                   isPending={isActionPending}
                   variant={isActionDestructive ? 'destructive' : 'default'}
-                  className={cn('', isActionDestructive && 'text-foreground')}
+                  className={cn('', isActionDestructive && 'bg-destructive text-foreground')}
                   border={2}
                   onClick={() => onActionClick?.()}>
                   {actionButtonChildren ?? (
