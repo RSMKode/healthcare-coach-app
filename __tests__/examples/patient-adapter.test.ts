@@ -9,15 +9,15 @@ describe('patientAdapter', () => {
       name: 'Roger',
       age: 26,
       primaryCondition: 'Diabetes',
-      createdAt: new Date('2025-10-01T10:00:00Z'),
-      updatedAt: new Date('2025-10-02T12:00:00Z'),
+      createdAt: new Date('2025-10-01T10:00:00'),
+      updatedAt: new Date('2025-10-02T12:00:00'),
       coachingNotes: [
         {
           patientId: 'some-id',
           id: 'note1',
           note: 'Follow-up in 2 weeks',
-          createdAt: new Date('2025-10-01T10:00:00Z'),
-          updatedAt: new Date('2025-10-02T12:00:00Z'),
+          createdAt: new Date('2025-10-01T10:00:00'),
+          updatedAt: new Date('2025-10-02T12:00:00'),
         },
       ],
     };
@@ -29,15 +29,15 @@ describe('patientAdapter', () => {
       name: 'Roger',
       age: 26,
       primaryCondition: 'Diabetes',
-      createdAt: new Date('2025-10-01T10:00:00Z'),
-      updatedAt: new Date('2025-10-02T12:00:00Z'),
+      createdAt: new Date('2025-10-01T10:00:00'),
+      updatedAt: new Date('2025-10-02T12:00:00'),
       coachingNotes: [
         {
           patientId: 'some-id',
           id: 'note1',
           note: 'Follow-up in 2 weeks',
-          createdAt: new Date('2025-10-01T10:00:00Z'),
-          updatedAt: new Date('2025-10-02T12:00:00Z'),
+          createdAt: new Date('2025-10-01T10:00:00'),
+          updatedAt: new Date('2025-10-02T12:00:00'),
         },
       ],
     });
@@ -50,8 +50,8 @@ describe('patientAdapter', () => {
       age: 30,
       primaryCondition: 'Hypertension',
       coachingNotes: [],
-      createdAt: new Date('2025-10-01T10:00:00Z'),
-      updatedAt: new Date('2025-10-02T12:00:00Z'),
+      createdAt: new Date('2025-10-01T10:00:00'),
+      updatedAt: new Date('2025-10-02T12:00:00'),
     };
 
     const adaptedPatient: PatientT = patientAdapter(patientApi);
@@ -62,8 +62,28 @@ describe('patientAdapter', () => {
       age: 30,
       primaryCondition: 'Hypertension',
       coachingNotes: [],
-      createdAt: new Date('2025-10-01T10:00:00Z'),
-      updatedAt: new Date('2025-10-02T12:00:00Z'),
+      createdAt: new Date('2025-10-01T10:00:00'),
+      updatedAt: new Date('2025-10-02T12:00:00'),
     });
+  });
+
+  it('preserves exact timestamp data', () => {
+    const specificDate = new Date('2025-06-30T23:59:59.999');
+    
+    const patientApi: PatientApiT = {
+      id: 'timestamp-test',
+      name: 'John Doe',
+      age: 45,
+      primaryCondition: 'Heart Disease',
+      coachingNotes: [],
+      createdAt: specificDate,
+      updatedAt: specificDate,
+    };
+
+    const adaptedPatient: PatientT = patientAdapter(patientApi);
+
+    expect(adaptedPatient.createdAt).toStrictEqual(specificDate);
+    expect(adaptedPatient.updatedAt).toStrictEqual(specificDate);
+    expect(adaptedPatient.createdAt.getTime()).toBe(specificDate.getTime());
   });
 });
