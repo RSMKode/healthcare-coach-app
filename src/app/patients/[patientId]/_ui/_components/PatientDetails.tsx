@@ -1,3 +1,4 @@
+import { PatientT } from '@/_core/patients/patients.definitions';
 import { Avatar, AvatarFallback } from '@/app/_components/ui/avatar';
 import {
   Card,
@@ -7,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/app/_components/ui/card';
-import { PatientT } from '@/app/patients/_core/patients/patients.definitions';
 import { getInitialsFromName } from '@/lib/presenter.lib';
 
 type PatientDetailsProps = React.ComponentProps<typeof Card> & {
