@@ -5,12 +5,8 @@ import { CoachingNoteCard } from '../../src/app/patients/[patientId]/_ui/_compon
 import { PatientsContextProvider } from '@/app/patients/context';
 
 // Helper para envolver componentes con el provider
-const renderWithContextProvider = (component: React.ReactElement) => {
-  return render(
-    <PatientsContextProvider>
-      {component}
-    </PatientsContextProvider>
-  );
+const customRender = (component: React.ReactElement) => {
+  return render(component, { wrapper: PatientsContextProvider });
 };
 
 describe('CoachingNoteCard', () => {
@@ -27,7 +23,7 @@ describe('CoachingNoteCard', () => {
       createdAt: new Date('2025-10-01T10:30:00'),
     };
 
-    renderWithContextProvider(<CoachingNoteCard coachingNote={mockCoachingNote} />);
+    customRender(<CoachingNoteCard coachingNote={mockCoachingNote} />);
 
     expect(screen.getByText('This is a test note')).toBeInTheDocument();
     expect(screen.getByText('10/1/2025')).toBeInTheDocument();
@@ -44,7 +40,7 @@ describe('CoachingNoteCard', () => {
       updatedAt: new Date('2025-10-01T10:30:00'),
     };
 
-    renderWithContextProvider(<CoachingNoteCard coachingNote={mockCoachingNote} />);
+    customRender(<CoachingNoteCard coachingNote={mockCoachingNote} />);
 
     expect(screen.getByText('10/1/2025')).toBeInTheDocument();
     expect(screen.getByText(/10:30:00/)).toBeInTheDocument();
@@ -59,7 +55,7 @@ describe('CoachingNoteCard', () => {
       updatedAt: new Date('2025-10-01T10:30:00'),
     };
 
-    renderWithContextProvider(<CoachingNoteCard coachingNote={mockCoachingNote} />);
+    customRender(<CoachingNoteCard coachingNote={mockCoachingNote} />);
 
     expect(screen.getByText('A'.repeat(500))).toBeInTheDocument();
     expect(screen.getAllByText('10/1/2025')).toHaveLength(1);
