@@ -1,9 +1,6 @@
+import { PatientApiT, PatientT, patientAdapter } from '@/_core/patients/patients.definitions';
 import { describe, expect, it } from 'vitest';
-import {
-  patientAdapter,
-  PatientApiT,
-  PatientT,
-} from '../../src/app/patients/_core/patients/patients.definitions';
+
 
 describe('patientAdapter', () => {
   it('adapts a PatientApiT object to a PatientT object', () => {
